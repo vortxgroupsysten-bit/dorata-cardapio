@@ -30,6 +30,12 @@
   <link rel="apple-touch-icon" href="imagens/logo-dorata-og.jpg">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+  
   <style>
     /* ===== RESET E BASE ===== */
     html {
@@ -559,7 +565,6 @@
       margin: 0.5rem 0;
     }
     
-    /* ===== ITEM DO CARRINHO COM IMAGEM ===== */
     .item-carrinho-modal {
       display: flex;
       align-items: center;
@@ -576,7 +581,6 @@
       flex: 1;
       min-width: 140px;
     }
-    /* Miniatura da imagem do item no carrinho */
     .item-carrinho-modal .item-thumb {
       width: 48px;
       height: 48px;
@@ -1197,7 +1201,7 @@
       .social-buttons { gap: 0.8rem; }
     }
 
-    /* ===== OUTROS AJUSTES EXISTENTES ===== */
+    /* ===== OUTROS AJUSTES ===== */
     @media (max-width: 600px) {
       .app { padding: 0.8rem 0.6rem; }
       .nav-tabs a { font-size: 0.8rem; padding: 0.25rem 0.9rem; }
@@ -1221,6 +1225,46 @@
       .grid-itens { grid-template-columns: 1fr; }
       .nav-tabs { gap: 0.3rem; }
       .logo-placeholder img { max-height: 140px; }
+    }
+    
+    /* Status de envio */
+    .status-envio {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      right: 1.5rem;
+      background: rgba(0,0,0,0.9);
+      color: #f5e6d3;
+      padding: 0.8rem 1.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(212, 160, 23, 0.2);
+      z-index: 999;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      align-items: center;
+      gap: 10px;
+    }
+    .status-envio.visivel {
+      display: flex;
+    }
+    .status-envio .spinner {
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .status-envio.sucesso {
+      border-color: #22c55e;
+    }
+    .status-envio.sucesso .spinner {
+      color: #22c55e;
+    }
+    .status-envio.erro {
+      border-color: #ef4444;
+    }
+    .status-envio.erro .spinner {
+      color: #ef4444;
     }
   </style>
 </head>
@@ -1259,7 +1303,6 @@
 <!-- ================= RODAPÉ (FOOTER) ================= -->
 <footer class="footer-dorata">
   <div class="footer-grid">
-    <!-- COLUNA 1 -->
     <div class="footer-col">
       <h4><i class="fas fa-store-alt" style="color:#d4a017; margin-right:8px;"></i>Dorata Coxinhas</h4>
       <p class="footer-info-text">
@@ -1278,7 +1321,6 @@
       </p>
     </div>
 
-    <!-- COLUNA 2 -->
     <div class="footer-col footer-social">
       <span class="social-title"><i class="fas fa-share-alt" style="color:#d4a017; margin-right:8px;"></i>Siga-nos</span>
       <div class="social-buttons">
@@ -1291,7 +1333,6 @@
       </div>
     </div>
 
-    <!-- COLUNA 3 -->
     <div class="footer-col">
       <span class="map-title"><i class="fas fa-map-marked-alt" style="color:#d4a017; margin-right:8px;"></i>Nossa localização</span>
       <div class="map-wrapper">
@@ -1346,6 +1387,12 @@
     <span style="font-size:0.6rem; opacity:0.5; color:#8a7a66;"><i class="fas fa-chevron-up"></i> abrir</span>
   </div>
   <button class="abrir-pedido" id="abrir-modal-btn"><i class="fas fa-shopping-cart"></i> Carrinho</button>
+</div>
+
+<!-- STATUS DE ENVIO -->
+<div class="status-envio" id="status-envio">
+  <i class="fas fa-spinner spinner"></i>
+  <span id="status-envio-text">Enviando pedido...</span>
 </div>
 
 <!-- MODAL CARRINHO -->
@@ -1440,7 +1487,7 @@
       </div>
 
       <button class="btn-finalizar" id="btn-finalizar">
-        <i class="fab fa-whatsapp"></i> Finalizar pedido
+        <i class="fas fa-paper-plane"></i> Enviar Pedido
       </button>
     </div>
   </div>
@@ -1449,6 +1496,22 @@
 <!-- ================= JAVASCRIPT ================= -->
 <script>
   (function() {
+    // ===== CONFIGURAÇÃO DO FIREBASE =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyARnlkMJyjLhUDsjZAJg78w0Bd1_T2a4b8",
+      authDomain: "cardapio-dorata.firebaseapp.com",
+      projectId: "cardapio-dorata",
+      storageBucket: "cardapio-dorata.firebasestorage.app",
+      messagingSenderId: "966908239788",
+      appId: "1:966908239788:web:e6293c0e5947b4fd5c2409",
+      measurementId: "G-W3X7HS7RV1"
+    };
+
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // ===== VARIÁVEIS =====
     const HORARIO_FUNCIONAMENTO = {
       inicio: 17,
       fim: 22,
@@ -1487,6 +1550,68 @@
     let carrinho = {};
     let comboSelecionado = null;
     let saboresSelecionados = {};
+    let enviandoPedido = false;
+
+    // ===== DOM REFS =====
+    const coxinhasContainer = document.getElementById('coxinhas-container');
+    const combosContainer = document.getElementById('combos-container');
+    const bebidasContainer = document.getElementById('bebidas-container');
+    const listaCarrinhoModal = document.getElementById('lista-carrinho-modal');
+    const totalModalSpan = document.getElementById('total-modal');
+    const totalFlutuante = document.getElementById('total-carrinho-flutuante');
+    const badgeQtd = document.getElementById('badge-qtd');
+    const modal = document.getElementById('modal-carrinho');
+    const modalSabores = document.getElementById('modal-sabores');
+    const listaSabores = document.getElementById('lista-sabores');
+    const contadorSabores = document.getElementById('contador-sabores');
+    const totalNecessario = document.getElementById('total-necessario');
+    const faltamSabores = document.getElementById('faltam-sabores');
+    const statusSabores = document.getElementById('status-sabores');
+    const comboNomeModal = document.getElementById('combo-nome-modal');
+    const comboQtdModal = document.getElementById('combo-qtd-modal');
+    const btnAdicionarCombo = document.getElementById('btn-adicionar-combo');
+    const fecharSabores = document.getElementById('fechar-sabores');
+    const abrirModalBtn = document.getElementById('abrir-modal-btn');
+    const fecharModalBtn = document.getElementById('fechar-modal');
+    const limparModalBtn = document.getElementById('limpar-modal');
+    const btnContinuar = document.getElementById('btn-continuar');
+    const btnVoltarCarrinho = document.getElementById('btn-voltar-carrinho');
+    const btnIrRevisao = document.getElementById('btn-ir-revisao');
+    const btnVoltarEndereco = document.getElementById('btn-voltar-endereco');
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    const etapaCarrinho = document.getElementById('etapa-carrinho');
+    const dadosEntrega = document.getElementById('dados-entrega');
+    const telaRevisao = document.getElementById('tela-revisao');
+    const revisaoItens = document.getElementById('revisao-itens');
+    const revisaoTotal = document.getElementById('revisao-total');
+    const revisaoNome = document.getElementById('revisao-nome');
+    const revisaoEndereco = document.getElementById('revisao-endereco');
+    const revisaoPagamento = document.getElementById('revisao-pagamento');
+    const revisaoTroco = document.getElementById('revisao-troco');
+    const nomeInput = document.getElementById('nome-cliente');
+    const ruaInput = document.getElementById('rua-cliente');
+    const bairroInput = document.getElementById('bairro-cliente');
+    const numeroInput = document.getElementById('numero-cliente');
+    const complementoInput = document.getElementById('complemento-cliente');
+    const pagamentoSelect = document.getElementById('pagamento-modal');
+    const trocoContainer = document.getElementById('campo-troco-modal');
+    const trocoInput = document.getElementById('troco-valor-modal');
+    const carrinhoFlutuante = document.getElementById('carrinho-flutuante');
+    const alertaVazio = document.getElementById('alerta-vazio');
+    const alertaHorario = document.getElementById('alerta-horario');
+    const mensagemHorario = document.getElementById('mensagem-horario');
+    const erroNome = document.getElementById('erro-nome');
+    const erroRua = document.getElementById('erro-rua');
+    const erroBairro = document.getElementById('erro-bairro');
+    const erroNumero = document.getElementById('erro-numero');
+    const erroTroco = document.getElementById('erro-troco');
+    const statusEnvio = document.getElementById('status-envio');
+    const statusEnvioText = document.getElementById('status-envio-text');
+
+    // ===== FUNÇÕES AUXILIARES =====
+    function formatCurrency(value) {
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
 
     function verificarHorarioFuncionamento() {
       const now = new Date();
@@ -1541,97 +1666,43 @@
       } catch (e) { console.warn('Erro ao salvar storage', e); }
     }
 
-    // ========== RENDER ITENS ==========
-    const coxinhasContainer = document.getElementById('coxinhas-container');
-    const combosContainer = document.getElementById('combos-container');
-    const bebidasContainer = document.getElementById('bebidas-container');
-    const listaCarrinhoModal = document.getElementById('lista-carrinho-modal');
-    const totalModalSpan = document.getElementById('total-modal');
-    const totalFlutuante = document.getElementById('total-carrinho-flutuante');
-    const badgeQtd = document.getElementById('badge-qtd');
-    const modal = document.getElementById('modal-carrinho');
-    const modalSabores = document.getElementById('modal-sabores');
-    const listaSabores = document.getElementById('lista-sabores');
-    const contadorSabores = document.getElementById('contador-sabores');
-    const totalNecessario = document.getElementById('total-necessario');
-    const faltamSabores = document.getElementById('faltam-sabores');
-    const statusSabores = document.getElementById('status-sabores');
-    const comboNomeModal = document.getElementById('combo-nome-modal');
-    const comboQtdModal = document.getElementById('combo-qtd-modal');
-    const btnAdicionarCombo = document.getElementById('btn-adicionar-combo');
-    const fecharSabores = document.getElementById('fechar-sabores');
-    const abrirModalBtn = document.getElementById('abrir-modal-btn');
-    const fecharModalBtn = document.getElementById('fechar-modal');
-    const limparModalBtn = document.getElementById('limpar-modal');
-    const btnContinuar = document.getElementById('btn-continuar');
-    const btnVoltarCarrinho = document.getElementById('btn-voltar-carrinho');
-    const btnIrRevisao = document.getElementById('btn-ir-revisao');
-    const btnVoltarEndereco = document.getElementById('btn-voltar-endereco');
-    const btnFinalizar = document.getElementById('btn-finalizar');
-    const etapaCarrinho = document.getElementById('etapa-carrinho');
-    const dadosEntrega = document.getElementById('dados-entrega');
-    const telaRevisao = document.getElementById('tela-revisao');
-    const revisaoItens = document.getElementById('revisao-itens');
-    const revisaoTotal = document.getElementById('revisao-total');
-    const revisaoNome = document.getElementById('revisao-nome');
-    const revisaoEndereco = document.getElementById('revisao-endereco');
-    const revisaoPagamento = document.getElementById('revisao-pagamento');
-    const revisaoTroco = document.getElementById('revisao-troco');
-    const nomeInput = document.getElementById('nome-cliente');
-    const ruaInput = document.getElementById('rua-cliente');
-    const bairroInput = document.getElementById('bairro-cliente');
-    const numeroInput = document.getElementById('numero-cliente');
-    const complementoInput = document.getElementById('complemento-cliente');
-    const pagamentoSelect = document.getElementById('pagamento-modal');
-    const trocoContainer = document.getElementById('campo-troco-modal');
-    const trocoInput = document.getElementById('troco-valor-modal');
-    const carrinhoFlutuante = document.getElementById('carrinho-flutuante');
-    const alertaVazio = document.getElementById('alerta-vazio');
-    const alertaHorario = document.getElementById('alerta-horario');
-    const mensagemHorario = document.getElementById('mensagem-horario');
-    const erroNome = document.getElementById('erro-nome');
-    const erroRua = document.getElementById('erro-rua');
-    const erroBairro = document.getElementById('erro-bairro');
-    const erroNumero = document.getElementById('erro-numero');
-    const erroTroco = document.getElementById('erro-troco');
+    // ===== FUNÇÃO PARA ENVIAR PEDIDO AO FIRESTORE =====
+    async function enviarPedidoFirestore(dadosPedido) {
+      try {
+        statusEnvio.classList.add('visivel');
+        statusEnvio.className = 'status-envio visivel';
+        statusEnvioText.textContent = 'Enviando pedido...';
 
-    const navLinks = document.querySelectorAll('.nav-tabs a');
-    const sections = {
-      coxinhas: document.getElementById('coxinhas'),
-      combos: document.getElementById('combos'),
-      bebidas: document.getElementById('bebidas')
-    };
+        // Adicionar dados ao Firestore
+        const docRef = await db.collection('pedidos').add({
+          ...dadosPedido,
+          status: 'pending',
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
 
-    function setActiveTab(targetId) {
-      navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === targetId));
-    }
+        statusEnvio.className = 'status-envio visivel sucesso';
+        statusEnvioText.textContent = '✅ Pedido enviado com sucesso!';
+        
+        setTimeout(() => {
+          statusEnvio.classList.remove('visivel');
+        }, 3000);
 
-    function updateActiveTabOnScroll() {
-      const scrollY = window.scrollY + 100;
-      let found = false;
-      for (const [id, section] of Object.entries(sections)) {
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          const top = rect.top + window.scrollY;
-          const bottom = top + rect.height;
-          if (scrollY >= top - 50 && scrollY < bottom - 50) {
-            setActiveTab(id);
-            found = true;
-            break;
-          }
-        }
+        return docRef.id;
+      } catch (error) {
+        console.error('Erro ao enviar pedido:', error);
+        statusEnvio.className = 'status-envio visivel erro';
+        statusEnvioText.textContent = '❌ Erro ao enviar pedido. Tente novamente.';
+        
+        setTimeout(() => {
+          statusEnvio.classList.remove('visivel');
+        }, 4000);
+        
+        throw error;
       }
-      if (!found && scrollY < 100) setActiveTab('coxinhas');
     }
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        setActiveTab(this.dataset.target);
-      });
-    });
-    window.addEventListener('scroll', updateActiveTabOnScroll);
-    setTimeout(() => setActiveTab('coxinhas'), 100);
-
+    // ===== FUNÇÕES DO CARDÁPIO =====
     function renderItens() {
       const coxinhas = itensCardapio.filter(i => i.categoria === 'coxinha');
       const combos = itensCardapio.filter(i => i.categoria === 'combo');
@@ -1726,7 +1797,7 @@
       `;
     }
 
-    // ========== MODAL SABORES ==========
+    // ===== MODAL SABORES =====
     function abrirModalSabores(comboId) {
       const combo = itensCardapio.find(i => i.id === comboId);
       if (!combo) return;
@@ -1829,7 +1900,6 @@
       salvarStorage();
       fecharModalSabores();
       
-      // Atualiza o display nos cards
       document.querySelectorAll(`.item-card[data-id="${comboSelecionado.id}"] .qtd-display`).forEach(el => {
         let totalQtd = 0;
         Object.keys(carrinho).forEach(key => {
@@ -1839,7 +1909,7 @@
       });
     }
 
-    // ========== ATUALIZAR CARRINHO (COM IMAGENS) ==========
+    // ===== ATUALIZAR CARRINHO =====
     function atualizarTudo() {
       const ids = Object.keys(carrinho);
       let total = 0;
@@ -1864,7 +1934,6 @@
         let detalhes = '';
         let imgSrc = item ? (item.img || 'imagens/sem-imagem.jpg') : 'imagens/sem-imagem.jpg';
         
-        // Verifica se é um combo com detalhes salvos
         if (window.comboDetalhes && window.comboDetalhes[id]) {
           const comboInfo = window.comboDetalhes[id];
           nome = comboInfo.nome;
@@ -1877,7 +1946,6 @@
         total += subtotal;
         qtdTotal += qtd;
         
-        // Tratamento para imagem quebrada
         const imgOnError = "this.onerror=null; this.src='https://placehold.co/100x100/1a1a1a/d4a017?text=Item'";
         
         html += `
@@ -1910,7 +1978,6 @@
       totalFlutuante.textContent = `R$ ${totalStr}`;
       badgeQtd.textContent = qtdTotal;
       
-      // Event listeners dos itens do carrinho
       document.querySelectorAll('.item-carrinho-modal').forEach(el => {
         const id = el.dataset.id;
         const qtdSpan = el.querySelector('.carrinho-qtd-display');
@@ -1977,6 +2044,7 @@
       });
     }
 
+    // ===== FUNÇÕES DO MODAL CARRINHO =====
     function limparPedido() {
       carrinho = {};
       window.comboDetalhes = {};
@@ -2119,49 +2187,158 @@
       verificarHorarioEAtualizarBotao();
     }
 
-    function enviarWhatsApp() {
+    // ===== FUNÇÃO PRINCIPAL - ENVIAR PEDIDO =====
+    async function enviarPedido() {
+      if (enviandoPedido) return;
+      
       const status = verificarHorarioFuncionamento();
       if (!status.aberto) {
         alert('Desculpe, estamos fechados no momento. ' + status.mensagem);
         return;
       }
-      const nome = nomeInput.value.trim();
-      const rua = ruaInput.value.trim();
-      const bairro = bairroInput.value.trim();
-      const numero = numeroInput.value.trim();
-      const complemento = complementoInput.value.trim();
-      const pagamento = pagamentoSelect.value;
-      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
-      let troco = trocoInput.value.trim();
-      if (pagamento === 'Dinheiro' && troco !== '') {
-        troco = `R$ ${parseFloat(troco).toFixed(2)}`;
-      } else {
-        troco = 'Não se aplica';
+
+      // Validar formulário
+      if (!validarFormulario()) {
+        const primeiroErro = document.querySelector('.msg-erro.visivel');
+        if (primeiroErro) primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
       }
-      const grupos = agruparItensIdenticos();
-      let itensTexto = '';
-      let total = 0;
-      Object.entries(grupos).forEach(([nomeItem, info]) => {
-        const { qtd, precoUnitario } = info;
-        total += precoUnitario * qtd;
-        itensTexto += `   ${qtd}x ${nomeItem}\n`;
-      });
-      let enderecoDisplay = tipoEntrega === 'retirada' ? '🔄 Retirada no local' : `${rua}, ${numero} - ${bairro}${complemento ? ', ' + complemento : ''}`;
-      const totalStr = total.toFixed(2);
-      let mensagem = `*NOVO PEDIDO - DORATA COXINHAS*\n\n`;
-      mensagem += `*Cliente:* ${nome}\n`;
-      mensagem += `*${tipoEntrega === 'retirada' ? 'Retirada' : 'Endereço'}:* ${enderecoDisplay}\n`;
-      mensagem += `*Itens:*\n${itensTexto}`;
-      mensagem += `\n*Total:* R$ ${totalStr}`;
-      mensagem += `\n*Pagamento:* ${pagamento}`;
-      if (pagamento === 'Dinheiro' && troco !== 'Não se aplica') {
-        mensagem += `\n*Troco para:* ${troco}`;
+
+      enviandoPedido = true;
+      btnFinalizar.disabled = true;
+      btnFinalizar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+      try {
+        // Coletar dados do pedido
+        const nome = nomeInput.value.trim();
+        const rua = ruaInput.value.trim();
+        const bairro = bairroInput.value.trim();
+        const numero = numeroInput.value.trim();
+        const complemento = complementoInput.value.trim();
+        const pagamento = pagamentoSelect.value;
+        const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+        
+        let troco = trocoInput.value.trim();
+        let trocoNumero = null;
+        if (pagamento === 'Dinheiro' && troco !== '') {
+          trocoNumero = parseFloat(troco);
+        }
+
+        // Preparar itens do pedido
+        const itensPedido = [];
+        Object.keys(carrinho).forEach(id => {
+          const qtd = carrinho[id];
+          let item = itensCardapio.find(i => i.id === id);
+          let nomeItem = item ? item.nome : 'Item';
+          let precoUnitario = item ? item.preco : 0;
+          let detalhes = '';
+          
+          if (window.comboDetalhes && window.comboDetalhes[id]) {
+            const comboInfo = window.comboDetalhes[id];
+            nomeItem = comboInfo.nome;
+            precoUnitario = comboInfo.precoUnitario;
+            detalhes = comboInfo.detalhes;
+          }
+          
+          itensPedido.push({
+            name: nomeItem,
+            qty: qtd,
+            price: precoUnitario,
+            details: detalhes
+          });
+        });
+
+        const total = calcularTotalCarrinho();
+        const now = new Date();
+        const hora = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        // Construir objeto do pedido
+        const dadosPedido = {
+          customer: nome,
+          phone: '(11) 99999-9999', // Você pode adicionar campo de telefone se quiser
+          type: tipoEntrega,
+          items: itensPedido,
+          total: total,
+          time: hora,
+          payment: {
+            method: pagamento.toLowerCase().replace('ç', 'c').replace('ã', 'a'),
+            change: trocoNumero,
+            amount: trocoNumero || null
+          }
+        };
+
+        // Adicionar endereço se for entrega
+        if (tipoEntrega === 'entrega') {
+          dadosPedido.address = {
+            street: rua,
+            number: numero,
+            neighborhood: bairro,
+            complement: complemento || ''
+          };
+        }
+
+        // Gerar número do pedido
+        const numeroPedido = `#${String(Math.floor(1000 + Math.random() * 9000))}`;
+        dadosPedido.number = numeroPedido;
+
+        // Enviar para o Firestore
+        const docId = await enviarPedidoFirestore(dadosPedido);
+
+        // Limpar carrinho após envio
+        limparPedido();
+        
+        // Fechar modal
+        modal.classList.remove('aberto');
+        
+        // Mostrar mensagem de sucesso
+        alert(`✅ Pedido ${numeroPedido} enviado com sucesso!\n\nAguardamos você na Dorata Coxinhas! 🍗`);
+
+      } catch (error) {
+        console.error('Erro ao enviar pedido:', error);
+        alert('❌ Erro ao enviar pedido. Tente novamente.');
+      } finally {
+        enviandoPedido = false;
+        btnFinalizar.disabled = false;
+        btnFinalizar.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Pedido';
       }
-      mensagem += `\n\n*Enviado pelo cardápio digital*`;
-      const msgEncoded = encodeURIComponent(mensagem);
-      const numeroWhats = '5534999685194';
-      window.open(`https://wa.me/${numeroWhats}?text=${msgEncoded}`, '_blank');
     }
+
+    // ===== EVENT LISTENERS =====
+    document.querySelectorAll('input[name="tipo-entrega"]').forEach(radio => {
+      radio.addEventListener('change', toggleCamposEndereco);
+    });
+
+    function toggleCamposEndereco() {
+      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      const isRetirada = tipoEntrega === 'retirada';
+      ['campo-rua', 'campo-bairro', 'campo-numero', 'campo-complemento'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('retirada', isRetirada);
+      });
+      salvarStorage();
+    }
+
+    pagamentoSelect.addEventListener('change', toggleTroco);
+    limparModalBtn.addEventListener('click', limparPedido);
+    btnFinalizar.addEventListener('click', enviarPedido);
+    btnAdicionarCombo.addEventListener('click', adicionarComboAoCarrinho);
+    fecharSabores.addEventListener('click', fecharModalSabores);
+    modalSabores.addEventListener('click', (e) => {
+      if (e.target === modalSabores) fecharModalSabores();
+    });
+
+    btnContinuar.addEventListener('click', () => {
+      const ids = Object.keys(carrinho);
+      if (ids.length === 0) {
+        if (alertaVazio) alertaVazio.style.display = 'block';
+        return;
+      }
+      mostrarEndereco();
+    });
+
+    btnIrRevisao.addEventListener('click', mostrarRevisao);
+    btnVoltarCarrinho.addEventListener('click', mostrarCarrinho);
+    btnVoltarEndereco.addEventListener('click', mostrarEndereco);
 
     function mostrarCarrinho() {
       etapaCarrinho.style.display = 'block';
@@ -2188,40 +2365,6 @@
       telaRevisao.classList.add('ativo');
       carregarRevisao();
     }
-
-    function toggleCamposEndereco() {
-      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
-      const isRetirada = tipoEntrega === 'retirada';
-      ['campo-rua', 'campo-bairro', 'campo-numero', 'campo-complemento'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.toggle('retirada', isRetirada);
-      });
-      salvarStorage();
-    }
-
-    // ========== EVENT LISTENERS ==========
-    document.querySelectorAll('input[name="tipo-entrega"]').forEach(radio => {
-      radio.addEventListener('change', toggleCamposEndereco);
-    });
-    pagamentoSelect.addEventListener('change', toggleTroco);
-    limparModalBtn.addEventListener('click', limparPedido);
-    btnFinalizar.addEventListener('click', enviarWhatsApp);
-    btnAdicionarCombo.addEventListener('click', adicionarComboAoCarrinho);
-    fecharSabores.addEventListener('click', fecharModalSabores);
-    modalSabores.addEventListener('click', (e) => {
-      if (e.target === modalSabores) fecharModalSabores();
-    });
-    btnContinuar.addEventListener('click', () => {
-      const ids = Object.keys(carrinho);
-      if (ids.length === 0) {
-        if (alertaVazio) alertaVazio.style.display = 'block';
-        return;
-      }
-      mostrarEndereco();
-    });
-    btnIrRevisao.addEventListener('click', mostrarRevisao);
-    btnVoltarCarrinho.addEventListener('click', mostrarCarrinho);
-    btnVoltarEndereco.addEventListener('click', mostrarEndereco);
 
     [nomeInput, ruaInput, bairroInput, numeroInput, trocoInput].forEach(input => {
       input.addEventListener('input', function() {
@@ -2265,7 +2408,25 @@
       }
     });
 
-    // ========== INICIALIZAÇÃO ==========
+    // Navegação tabs
+    const navLinks = document.querySelectorAll('.nav-tabs a');
+    const sections = {
+      coxinhas: document.getElementById('coxinhas'),
+      combos: document.getElementById('combos'),
+      bebidas: document.getElementById('bebidas')
+    };
+
+    function setActiveTab(targetId) {
+      navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === targetId));
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        setActiveTab(this.dataset.target);
+      });
+    });
+
+    // ===== INICIALIZAÇÃO =====
     carregarStorage();
     renderItens();
     atualizarTudo();
@@ -2273,6 +2434,11 @@
     toggleCamposEndereco();
     if (pagamentoSelect.value === 'Dinheiro') trocoContainer.classList.add('visivel');
     verificarHorarioEAtualizarBotao();
+    setActiveTab('coxinhas');
+
+    console.log('🟢 Cardápio Dorata Coxinhas iniciado!');
+    console.log('🔌 Conectado ao Firestore para envio de pedidos');
+    console.log('📡 Os pedidos serão enviados para o painel administrativo em tempo real');
   })();
 </script>
 
