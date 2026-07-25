@@ -1673,7 +1673,6 @@
         statusEnvio.className = 'status-envio visivel';
         statusEnvioText.textContent = 'Enviando pedido...';
 
-        // Adicionar dados ao Firestore
         const docRef = await db.collection('pedidos').add({
           ...dadosPedido,
           status: 'pending',
@@ -2080,15 +2079,24 @@
       return total;
     }
 
+    // ===== VALIDAÇÃO CORRIGIDA =====
     function validarFormulario() {
       let valido = true;
       limparErros();
+      
+      // Pegar o tipo de entrega selecionado
       const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      
+      console.log('Tipo de entrega selecionado:', tipoEntrega); // Debug
+      
+      // Validar nome sempre
       if (!nomeInput.value.trim()) {
         erroNome.classList.add('visivel');
         nomeInput.classList.add('erro');
         valido = false;
       }
+      
+      // SÓ validar endereço se for ENTREGA
       if (tipoEntrega === 'entrega') {
         if (!ruaInput.value.trim()) {
           erroRua.classList.add('visivel');
@@ -2106,6 +2114,8 @@
           valido = false;
         }
       }
+      
+      // Validar troco
       if (pagamentoSelect.value === 'Dinheiro' && trocoInput.value.trim() !== '') {
         const trocoValor = parseFloat(trocoInput.value);
         const total = calcularTotalCarrinho();
@@ -2173,6 +2183,9 @@
       const complemento = complementoInput.value.trim();
       const pagamento = pagamentoSelect.value;
       const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      
+      console.log('Tipo de entrega na revisão:', tipoEntrega); // Debug
+      
       let enderecoDisplay = tipoEntrega === 'retirada' ? '🔄 Retirada no local' : `${rua}, ${numero} - ${bairro}${complemento ? ', ' + complemento : ''}`;
       let troco = trocoInput.value.trim();
       if (pagamento === 'Dinheiro' && troco !== '') {
@@ -2197,7 +2210,6 @@
         return;
       }
 
-      // Validar formulário
       if (!validarFormulario()) {
         const primeiroErro = document.querySelector('.msg-erro.visivel');
         if (primeiroErro) primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2209,7 +2221,6 @@
       btnFinalizar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
       try {
-        // Coletar dados do pedido
         const nome = nomeInput.value.trim();
         const rua = ruaInput.value.trim();
         const bairro = bairroInput.value.trim();
@@ -2218,13 +2229,14 @@
         const pagamento = pagamentoSelect.value;
         const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
         
+        console.log('Enviando pedido com tipo:', tipoEntrega); // Debug
+        
         let troco = trocoInput.value.trim();
         let trocoNumero = null;
         if (pagamento === 'Dinheiro' && troco !== '') {
           trocoNumero = parseFloat(troco);
         }
 
-        // Preparar itens do pedido
         const itensPedido = [];
         Object.keys(carrinho).forEach(id => {
           const qtd = carrinho[id];
@@ -2252,11 +2264,11 @@
         const now = new Date();
         const hora = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-        // Construir objeto do pedido
+        // CORREÇÃO: Garantir que o tipo está correto
         const dadosPedido = {
           customer: nome,
-          phone: '(11) 99999-9999', // Você pode adicionar campo de telefone se quiser
-          type: tipoEntrega,
+          phone: '(11) 99999-9999',
+          type: tipoEntrega, // <-- AQUI ESTÁ A CORREÇÃO PRINCIPAL
           items: itensPedido,
           total: total,
           time: hora,
@@ -2267,7 +2279,7 @@
           }
         };
 
-        // Adicionar endereço se for entrega
+        // Adicionar endereço apenas se for entrega
         if (tipoEntrega === 'entrega') {
           dadosPedido.address = {
             street: rua,
@@ -2277,20 +2289,13 @@
           };
         }
 
-        // Gerar número do pedido
         const numeroPedido = `#${String(Math.floor(1000 + Math.random() * 9000))}`;
         dadosPedido.number = numeroPedido;
 
-        // Enviar para o Firestore
-        const docId = await enviarPedidoFirestore(dadosPedido);
+        await enviarPedidoFirestore(dadosPedido);
 
-        // Limpar carrinho após envio
         limparPedido();
-        
-        // Fechar modal
         modal.classList.remove('aberto');
-        
-        // Mostrar mensagem de sucesso
         alert(`✅ Pedido ${numeroPedido} enviado com sucesso!\n\nAguardamos você na Dorata Coxinhas! 🍗`);
 
       } catch (error) {
@@ -2311,9 +2316,18 @@
     function toggleCamposEndereco() {
       const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
       const isRetirada = tipoEntrega === 'retirada';
+      
+      console.log('Toggle campos - Tipo selecionado:', tipoEntrega); // Debug
+      
       ['campo-rua', 'campo-bairro', 'campo-numero', 'campo-complemento'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.classList.toggle('retirada', isRetirada);
+        if (el) {
+          if (isRetirada) {
+            el.classList.add('retirada');
+          } else {
+            el.classList.remove('retirada');
+          }
+        }
       });
       salvarStorage();
     }
@@ -2351,6 +2365,7 @@
       etapaCarrinho.style.display = 'none';
       dadosEntrega.classList.add('ativo');
       telaRevisao.classList.remove('ativo');
+      toggleCamposEndereco(); // Atualizar visibilidade dos campos
     }
 
     function mostrarRevisao() {
