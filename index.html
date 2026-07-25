@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  
+  <title>Dorata Coxinhas · As melhores coxinhas da região</title>
+  <meta name="description" content="Bateu aquela fome? Peça as melhores coxinhas da região aqui! Delivery rápido e sabores incríveis.">
+  <meta name="keywords" content="coxinha, delivery, comida, lanche, frango, catupiry, calabresa">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vortxgroupsystem-bit.github.io/SISTEMA-DE-PEDIDOS/">
+  <meta property="og:title" content="Dorata Coxinhas · Peça já as melhores coxinhas da região">
+  <meta property="og:description" content="Bateu aquela fome? Peça as melhores coxinhas da região aqui! Delivery rápido, sabores incríveis e preços especiais.">
+  <meta property="og:image" content="https://vortxgroupsysten-bit.github.io/SISTEMA-DE-PEDIDOS/imagens/logo-dorata-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Dorata Coxinhas">
+  <meta property="og:locale" content="pt_BR">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://vortxgroupsystem-bit.github.io/SISTEMA-DE-PEDIDOS/">
+  <meta name="twitter:title" content="Dorata Coxinhas · Peça já as melhores coxinhas da região">
+  <meta name="twitter:description" content="Bateu aquela fome? Peça as melhores coxinhas da região aqui! Delivery rápido, sabores incríveis e preços especiais.">
+  <meta name="twitter:image" content="https://vortxgroupsystem-bit.github.io/SISTEMA-DE-PEDIDOS/imagens/logo-dorata-og.jpg">
+  
+  <link rel="icon" href="imagens/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="imagens/logo-dorata-og.jpg">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== RESET E BASE ===== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      background-image: radial-gradient(circle at 30% 20%, #1a120e 0%, #0a0a0a 90%);
+      min-height: 100vh;
+      padding: 0.5rem 0.8rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #d4a017; border-radius: 10px; }
+
+    /* ===== APP PRINCIPAL ===== */
+    .app {
+      max-width: 1200px;
+      width: 100%;
+      background: #111111;
+      background: linear-gradient(145deg, #161616 0%, #0d0d0d 100%);
+      border-radius: 2.5rem;
+      padding: 1rem 1rem 2rem;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 0 1px #2a1f14 inset, 0 0 30px rgba(212, 160, 23, 0.05);
+      border: 1px solid rgba(212, 160, 23, 0.15);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    /* ===== LOGO ===== */
+    .logo-topo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 1.5rem;
+      background: #000000;
+      border-radius: 2rem 2rem 0 0;
+    }
+
+    .logo-placeholder {
+      width: 100%;
+      background: transparent;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    .logo-placeholder:hover {
+      transform: scale(1.01);
+    }
+    .logo-placeholder img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      max-height: 280px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ===== NAVEGAÇÃO ===== */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.8rem;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      justify-content: center;
+      border-top: 1px solid rgba(212, 160, 23, 0.25);
+      border-bottom: 1px solid rgba(212, 160, 23, 0.25);
+    }
+    .nav-tabs a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #c9b084;
+      padding: 0.4rem 1.4rem;
+      border-radius: 40px;
+      background: rgba(20, 20, 20, 0.8);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(212, 160, 23, 0.15);
+      letter-spacing: 0.3px;
+    }
+    .nav-tabs a:hover {
+      background: rgba(212, 160, 23, 0.12);
+      color: #f5d06a;
+      border-color: rgba(212, 160, 23, 0.4);
+      box-shadow: 0 0 25px rgba(212, 160, 23, 0.06);
+      transform: translateY(-1px);
+    }
+    .nav-tabs a i { font-size: 0.95rem; color: #d4a017; }
+    .nav-tabs a.active {
+      background: #d4a017;
+      color: #0d0d0d;
+      border-color: #d4a017;
+      box-shadow: 0 0 30px rgba(212, 160, 23, 0.2);
+    }
+    .nav-tabs a.active i { color: #0d0d0d; }
+
+    /* ===== SEÇÕES ===== */
+    .secao {
+      scroll-margin-top: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .categoria-titulo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      border-left: 4px solid #d4a017;
+      padding-left: 1rem;
+      margin-bottom: 0.9rem;
+    }
+    .categoria-titulo h2 {
+      font-size: 1.5rem;
+      color: #f5d06a;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 20px rgba(212, 160, 23, 0.08);
+    }
+    .categoria-titulo i {
+      font-size: 1.4rem;
+      color: #d4a017;
+      filter: drop-shadow(0 0 6px rgba(212, 160, 23, 0.2));
+    }
+
+    .grid-itens {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* ===== CARDS DE ITENS ===== */
+    .item-card {
+      background: linear-gradient(160deg, #1a1a1a, #0f0f0f);
+      border-radius: 24px;
+      padding: 0.9rem 0.8rem 1.1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 0 1px rgba(212, 160, 23, 0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(212, 160, 23, 0.06);
+    }
+    .item-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 0 1px rgba(212, 160, 23, 0.2);
+      border-color: rgba(212, 160, 23, 0.15);
+    }
+    .item-img {
+      width: 100%;
+      aspect-ratio: 1/0.8;
+      background: #1a1a1a;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(212, 160, 23, 0.06);
+      cursor: pointer;
+    }
+    .item-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .3s;
+    }
+    .item-card:hover .item-img img{transform:scale(1.08);}
+    .item-nome {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #f5e6d3;
+      letter-spacing: 0.2px;
+    }
+    .item-desc {
+      font-size: 0.7rem;
+      color: #8a7a66;
+      margin: 0.1rem 0 0.2rem;
+      opacity: 0.8;
+    }
+    .item-preco {
+      font-weight: 700;
+      color: #d4a017;
+      font-size: 1.1rem;
+      margin-top: 0.1rem;
+      text-shadow: 0 0 15px rgba(212, 160, 23, 0.1);
+    }
+
+    .qtd-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 0.5rem;
+      background: rgba(30, 30, 30, 0.8);
+      padding: 0.15rem 0.3rem;
+      border-radius: 40px;
+      width: 100%;
+      border: 1px solid rgba(212, 160, 23, 0.08);
+    }
+    .qtd-control button {
+      background: rgba(212, 160, 23, 0.15);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #d4a017;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .qtd-control button:hover {
+      background: rgba(212, 160, 23, 0.3);
+      box-shadow: 0 0 20px rgba(212, 160, 23, 0.1);
+    }
+    .qtd-control span {
+      min-width: 32px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #f5e6d3;
+    }
+
+    /* ===== MODAIS ===== */
+    .modal-sabores {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .modal-sabores.aberto { display: flex; }
+    .modal-sabores-content {
+      background: linear-gradient(160deg, #1a1a1a, #0a0a0a);
+      max-width: 500px;
+      width: 100%;
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(212, 160, 23, 0.15);
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid rgba(212, 160, 23, 0.1);
+      position: relative;
+    }
+    .modal-sabores-content .fechar-sabores {
+      position: absolute;
+      top: 0.8rem;
+      right: 1.2rem;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #8a7a66;
+      transition: 0.3s;
+    }
+    .modal-sabores-content .fechar-sabores:hover { color: #d4a017; }
+    .modal-sabores-content h3 {
+      color: #f5d06a;
+      font-size: 1.3rem;
+      border-bottom: 2px solid rgba(212, 160, 23, 0.15);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-sabores-content h3 i { color: #d4a017; }
+    .modal-sabores-content .info-combo {
+      color: #c9b084;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.06);
+      padding-bottom: 0.8rem;
+    }
+    .modal-sabores-content .info-combo strong { color: #f5d06a; }
+
+    .sabor-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.06);
+      gap: 0.5rem;
+    }
+    .sabor-item .sabor-nome {
+      color: #f5e6d3;
+      font-weight: 500;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+    .sabor-qtd-control {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(30, 30, 30, 0.8);
+      padding: 0.1rem 0.3rem;
+      border-radius: 40px;
+      border: 1px solid rgba(212, 160, 23, 0.06);
+    }
+    .sabor-qtd-control button {
+      background: rgba(212, 160, 23, 0.12);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #d4a017;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sabor-qtd-control button:hover { background: rgba(212, 160, 23, 0.25); }
+    .sabor-qtd-control span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f5e6d3;
+    }
+
+    .total-sabores {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #f5d06a;
+      margin: 0.8rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(212, 160, 23, 0.1);
+      padding-top: 0.8rem;
+    }
+    .total-sabores .restante { color: #8a7a66; font-weight: 400; }
+    .total-sabores .completo { color: #25D366; }
+
+    .btn-adicionar-combo {
+      background: linear-gradient(135deg, #d4a017, #b8860b);
+      color: #0d0d0d;
+      border: none;
+      border-radius: 60px;
+      padding: 0.7rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 0.5px;
+    }
+    .btn-adicionar-combo:hover {
+      background: linear-gradient(135deg, #e8b82a, #c9940a);
+      box-shadow: 0 0 40px rgba(212, 160, 23, 0.15);
+      transform: scale(1.01);
+    }
+    .btn-adicionar-combo:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-adicionar-combo:disabled:hover { transform: none; box-shadow: none; }
+
+    /* ===== CARRINHO FLUTUANTE ===== */
+    .carrinho-flutuante {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+      background: linear-gradient(135deg, #1a120e, #0d0d0d);
+      color: #f5e6d3;
+      border-radius: 60px;
+      padding: 0.6rem 1.2rem 0.6rem 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(212, 160, 23, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 160, 23, 0.15);
+    }
+    .carrinho-flutuante:hover {
+      transform: scale(1.03);
+      border-color: rgba(212, 160, 23, 0.4);
+      box-shadow: 0 10px 45px rgba(212, 160, 23, 0.08);
+    }
+    .carrinho-flutuante .icone-carrinho {
+      font-size: 1.5rem;
+      position: relative;
+      color: #d4a017;
+    }
+    .carrinho-flutuante .badge-qtd {
+      background: #d4a017;
+      color: #0d0d0d;
+      border-radius: 50%;
+      padding: 0.05rem 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      box-shadow: 0 0 15px rgba(212, 160, 23, 0.3);
+    }
+    .carrinho-flutuante .info-resumo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      font-size: 0.8rem;
+    }
+    .carrinho-flutuante .total-carrinho {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #f5d06a;
+    }
+    .carrinho-flutuante .abrir-pedido {
+      background: linear-gradient(135deg, #d4a017, #b8860b);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #0d0d0d;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.3px;
+    }
+    .carrinho-flutuante .abrir-pedido:hover {
+      background: linear-gradient(135deg, #e8b82a, #c9940a);
+      box-shadow: 0 0 30px rgba(212, 160, 23, 0.2);
+      transform: scale(1.02);
+    }
+
+    /* ===== MODAL CARRINHO ===== */
+    .modal-carrinho {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .modal-carrinho.aberto { display: flex; }
+    .modal-content {
+      background: linear-gradient(160deg, #161616, #0a0a0a);
+      max-width: 540px;
+      width: 100%;
+      border-radius: 2.5rem;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(212, 160, 23, 0.1);
+      max-height: 95vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid rgba(212, 160, 23, 0.08);
+    }
+    .modal-content .fechar-modal {
+      position: absolute;
+      top: 0.8rem;
+      right: 1.2rem;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #8a7a66;
+      transition: 0.3s;
+    }
+    .modal-content .fechar-modal:hover { color: #d4a017; }
+    .modal-content h3 {
+      font-size: 1.5rem;
+      color: #f5d06a;
+      border-bottom: 2px solid rgba(212, 160, 23, 0.15);
+      padding-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-shadow: 0 0 20px rgba(212, 160, 23, 0.05);
+    }
+    .modal-content h3 i { color: #d4a017; }
+
+    .alerta-carrinho-vazio {
+      background: rgba(217, 83, 79, 0.15);
+      border: 1px solid rgba(217, 83, 79, 0.3);
+      color: #ff8080;
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      display: none;
+      text-align: center;
+    }
+
+    .lista-carrinho-modal {
+      max-height: 300px;
+      overflow-y: auto;
+      margin: 0.5rem 0;
+    }
+    
+    /* ===== ITEM DO CARRINHO COM IMAGEM ===== */
+    .item-carrinho-modal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.06);
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .item-carrinho-modal .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex: 1;
+      min-width: 140px;
+    }
+    /* Miniatura da imagem do item no carrinho */
+    .item-carrinho-modal .item-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(212, 160, 23, 0.15);
+      background: #1a1a1a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .item-carrinho-modal .item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .item-carrinho-modal .item-thumb img.placeholder-thumb {
+      object-fit: contain;
+      padding: 4px;
+      opacity: 0.6;
+    }
+    .item-carrinho-modal .info-texto {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 60px;
+    }
+    .item-carrinho-modal .info-texto .nome-qtd {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #f5e6d3;
+    }
+    .item-carrinho-modal .info-texto .detalhes-combo {
+      font-size: 0.65rem;
+      color: #8a7a66;
+      display: block;
+      margin-top: 1px;
+    }
+    .item-carrinho-modal .info-texto .preco-item {
+      font-size: 0.8rem;
+      color: #d4a017;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+    .item-carrinho-modal .controles-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(30, 30, 30, 0.8);
+      padding: 0.1rem 0.3rem;
+      border-radius: 40px;
+      border: 1px solid rgba(212, 160, 23, 0.06);
+      flex-shrink: 0;
+    }
+    .item-carrinho-modal .controles-item button {
+      background: rgba(212, 160, 23, 0.12);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #d4a017;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .item-carrinho-modal .controles-item button:hover { background: rgba(212, 160, 23, 0.25); }
+    .item-carrinho-modal .controles-item span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f5e6d3;
+    }
+    .item-carrinho-modal .btn-excluir {
+      background: rgba(180, 40, 40, 0.2);
+      color: #d9534f;
+      border: none;
+      border-radius: 30px;
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .item-carrinho-modal .btn-excluir:hover { background: rgba(180, 40, 40, 0.4); }
+
+    .total-modal {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f5d06a;
+      margin: 0.5rem 0 0.8rem;
+      background: rgba(212, 160, 23, 0.06);
+      padding: 0.1rem 1.2rem;
+      border-radius: 60px;
+      display: inline-block;
+      border: 1px solid rgba(212, 160, 23, 0.08);
+      text-shadow: 0 0 20px rgba(212, 160, 23, 0.05);
+    }
+
+    .btn-continuar {
+      background: linear-gradient(135deg, #d4a017, #b8860b);
+      color: #0d0d0d;
+      border: none;
+      border-radius: 60px;
+      padding: 0.7rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 0.5px;
+    }
+    .btn-continuar:hover {
+      background: linear-gradient(135deg, #e8b82a, #c9940a);
+      box-shadow: 0 0 40px rgba(212, 160, 23, 0.15);
+      transform: scale(1.01);
+    }
+    .btn-continuar i { color: #0d0d0d; }
+
+    .btn-limpar-modal {
+      background: rgba(212, 160, 23, 0.06);
+      border: 1px solid rgba(212, 160, 23, 0.1);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #8a7a66;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.3s;
+    }
+    .btn-limpar-modal:hover {
+      background: rgba(212, 160, 23, 0.12);
+      color: #d4a017;
+    }
+
+    .btn-voltar-carrinho, .btn-voltar-endereco {
+      background: rgba(212, 160, 23, 0.06);
+      border: 1px solid rgba(212, 160, 23, 0.08);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #8a7a66;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.3s;
+      margin-bottom: 0.5rem;
+    }
+    .btn-voltar-carrinho:hover, .btn-voltar-endereco:hover {
+      background: rgba(212, 160, 23, 0.12);
+      color: #d4a017;
+    }
+
+    .opcao-entrega {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      padding: 0.3rem 0;
+    }
+    .opcao-entrega label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #c9b084;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .opcao-entrega input[type="radio"] {
+      accent-color: #d4a017;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .dados-entrega {
+      display: none;
+      margin-top: 1rem;
+      border-top: 2px solid rgba(212, 160, 23, 0.08);
+      padding-top: 1rem;
+    }
+    .dados-entrega.ativo { display: block; }
+
+    .form-group-modal {
+      margin-bottom: 0.7rem;
+    }
+    .form-group-modal label {
+      font-weight: 600;
+      color: #c9b084;
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 3px;
+      letter-spacing: 0.3px;
+    }
+    .form-group-modal label .obrigatorio { color: #d4a017; margin-left: 2px; }
+    .form-group-modal input, .form-group-modal select {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      border: 1px solid rgba(212, 160, 23, 0.1);
+      background: rgba(20, 20, 20, 0.8);
+      color: #f5e6d3;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+    .form-group-modal input:focus, .form-group-modal select:focus {
+      outline: none;
+      border-color: rgba(212, 160, 23, 0.4);
+      box-shadow: 0 0 30px rgba(212, 160, 23, 0.04);
+    }
+    .form-group-modal input::placeholder { color: #5a4a3a; }
+    .form-group-modal input.erro {
+      border-color: #c0392b;
+      box-shadow: 0 0 25px rgba(192, 57, 43, 0.1);
+    }
+    .form-group-modal select option { background: #1a1a1a; color: #f5e6d3; }
+
+    .campo-troco-modal {
+      background: rgba(212, 160, 23, 0.03);
+      padding: 0.5rem 0.8rem;
+      border-radius: 40px;
+      margin-top: 4px;
+      display: none;
+      border: 1px solid rgba(212, 160, 23, 0.05);
+    }
+    .campo-troco-modal.visivel { display: block; }
+
+    .msg-erro {
+      color: #d9534f;
+      font-size: 0.7rem;
+      margin-top: 3px;
+      display: none;
+      letter-spacing: 0.2px;
+    }
+    .msg-erro.visivel { display: block; }
+
+    .tela-revisao {
+      display: none;
+      margin-top: 1rem;
+      border-top: 2px solid rgba(212, 160, 23, 0.08);
+      padding-top: 1rem;
+    }
+    .tela-revisao.ativo { display: block; }
+    .tela-revisao h4 {
+      color: #f5d06a;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tela-revisao h4 i { color: #d4a017; }
+
+    .revisao-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.05);
+      font-size: 0.95rem;
+      color: #f5e6d3;
+    }
+    .revisao-item span:last-child { color: #d4a017; font-weight: 600; }
+    .revisao-total {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f5d06a;
+      margin: 0.5rem 0;
+      background: rgba(212, 160, 23, 0.05);
+      padding: 0.1rem 1.2rem;
+      border-radius: 60px;
+      display: inline-block;
+      border: 1px solid rgba(212, 160, 23, 0.06);
+    }
+    .revisao-dado {
+      padding: 0.2rem 0;
+      font-size: 0.95rem;
+      color: #c9b084;
+    }
+    .revisao-dado strong { color: #f5e6d3; }
+
+    .btn-finalizar {
+      background: linear-gradient(135deg, #25D366, #1da854);
+      border: none;
+      border-radius: 60px;
+      padding: 0.8rem 1rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0d0d0d;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.3px;
+    }
+    .btn-finalizar:hover:not(:disabled) {
+      background: linear-gradient(135deg, #30d97a, #1fb85e);
+      box-shadow: 0 0 40px rgba(37, 211, 102, 0.15);
+      transform: scale(1.01);
+    }
+    .btn-finalizar:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-finalizar:disabled:hover { transform: none; box-shadow: none; }
+
+    .campo-endereco.retirada { display: none !important; }
+
+    .alerta-horario {
+      background: rgba(217, 83, 79, 0.15);
+      border: 1px solid rgba(217, 83, 79, 0.3);
+      color: #ff8080;
+      padding: 0.8rem 1rem;
+      border-radius: 20px;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none;
+    }
+    .alerta-horario.visivel { display: block; }
+    .alerta-horario i { margin-right: 8px; }
+
+    /* ============================================================ */
+    /* ================ RODAPÉ (FOOTER) ============================= */
+    /* ============================================================ */
+
+    .footer-dorata {
+      max-width: 1200px;
+      width: 100%;
+      background: #0d0d0d;
+      border-radius: 2rem 2rem 0 0;
+      border-top: 2px solid #d4a017;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 160, 23, 0.05);
+      padding: 2.5rem 2rem 1.2rem;
+      margin: 0 auto;
+      animation: fadeUp 0.8s ease-out both;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      color: #f5d06a;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 40px;
+      height: 2px;
+      background: #d4a017;
+      border-radius: 4px;
+    }
+
+    .footer-info-text {
+      color: #c9b084;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin: 0.5rem 0;
+    }
+    .footer-info-text i {
+      color: #d4a017;
+      width: 24px;
+      text-align: center;
+      margin-right: 6px;
+      transition: color 0.3s;
+    }
+    .footer-info-text:hover i {
+      color: #f5d06a;
+      text-shadow: 0 0 15px rgba(212, 160, 23, 0.3);
+    }
+    .footer-info-text a {
+      color: #c9b084;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-info-text a:hover {
+      color: #f5d06a;
+    }
+
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .footer-social .social-title {
+      font-size: 1.2rem;
+      color: #f5d06a;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-social .social-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 40px;
+      height: 2px;
+      background: #d4a017;
+      border-radius: 4px;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .btn-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      color: #c9b084;
+      border: 1px solid rgba(212, 160, 23, 0.15);
+      text-decoration: none;
+      font-size: 1.6rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-social::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 160, 23, 0.15) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .btn-social:hover::after { opacity: 1; }
+
+    .btn-social:hover {
+      transform: scale(1.12);
+      border-color: #d4a017;
+      box-shadow: 0 0 30px rgba(212, 160, 23, 0.15), 0 0 60px rgba(212, 160, 23, 0.05);
+      color: #f5d06a;
+    }
+
+    .btn-social i {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s;
+    }
+    .btn-social:hover i { transform: scale(1.05); }
+
+    .btn-social.instagram:hover {
+      background: radial-gradient(circle at 30% 30%, #fdf497, #fdf497 20%, #fd5949 45%, #d6249f 70%, #285AEB 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 40px rgba(214, 36, 159, 0.25), 0 0 80px rgba(253, 89, 73, 0.1);
+    }
+
+    .btn-social.whatsapp:hover {
+      background: #25D366;
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 40px rgba(37, 211, 102, 0.25);
+    }
+
+    .footer-col .map-title {
+      font-size: 1.2rem;
+      color: #f5d06a;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-col .map-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 40px;
+      height: 2px;
+      background: #d4a017;
+      border-radius: 4px;
+    }
+
+    .map-wrapper {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid rgba(212, 160, 23, 0.2);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      transition: all 0.4s ease;
+      max-width: 100%;
+    }
+    .map-wrapper:hover {
+      border-color: #d4a017;
+      box-shadow: 0 8px 40px rgba(212, 160, 23, 0.1);
+      transform: scale(1.01);
+    }
+    .map-wrapper iframe {
+      width: 100%;
+      height: 220px;
+      display: block;
+      border: none;
+      transition: transform 0.5s ease;
+    }
+    .map-wrapper:hover iframe { transform: scale(1.02); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(212, 160, 23, 0.08);
+      padding-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .footer-bottom p {
+      color: #6a5a4a;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+    }
+    .footer-bottom .dev {
+      font-weight: 600;
+      color: #c9b084;
+      transition: color 0.3s;
+      cursor: default;
+    }
+    .footer-bottom .dev:hover {
+      color: #f5d06a;
+      text-shadow: 0 0 20px rgba(212, 160, 23, 0.15);
+    }
+    .footer-bottom .dev i {
+      color: #d4a017;
+      margin-right: 4px;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 992px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.8rem;
+      }
+      .footer-col:last-child {
+        grid-column: 1 / -1;
+      }
+      .footer-social {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer-dorata {
+        padding: 2rem 1.5rem 1rem;
+        border-radius: 1.5rem 1.5rem 0 0;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+      .footer-col h4::after,
+      .footer-social .social-title::after,
+      .footer-col .map-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .footer-social { align-items: center; }
+      .social-buttons { justify-content: center; }
+      .footer-info-text { text-align: center; }
+      .footer-info-text i {
+        margin-right: 0;
+        display: inline-block;
+        width: auto;
+        margin: 0 4px;
+      }
+      .map-wrapper iframe { height: 200px; }
+      .footer-bottom p { font-size: 0.75rem; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-dorata { padding: 1.5rem 1rem 0.8rem; }
+      .map-wrapper iframe { height: 180px; }
+      .btn-social { width: 48px; height: 48px; font-size: 1.3rem; }
+      .social-buttons { gap: 0.8rem; }
+    }
+
+    /* ===== OUTROS AJUSTES EXISTENTES ===== */
+    @media (max-width: 600px) {
+      .app { padding: 0.8rem 0.6rem; }
+      .nav-tabs a { font-size: 0.8rem; padding: 0.25rem 0.9rem; }
+      .grid-itens { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .item-card { padding: 0.6rem; }
+      .carrinho-flutuante { bottom: 1rem; right: 1rem; padding: 0.4rem 0.8rem; gap: 0.5rem; }
+      .carrinho-flutuante .info-resumo { font-size: 0.65rem; }
+      .modal-content { padding: 1.2rem; }
+      .modal-sabores-content { padding: 1.2rem; }
+      .logo-topo { padding: 0.8rem 0; margin-bottom: 1rem; }
+      .logo-placeholder { padding: 0.2rem; }
+      .logo-placeholder img { max-height: 180px; width: 100%; }
+      .item-carrinho-modal { flex-wrap: wrap; gap: 0.3rem; }
+      .item-carrinho-modal .info-item { min-width: 100px; }
+      .item-carrinho-modal .item-thumb { width: 40px; height: 40px; }
+      .categoria-titulo h2 { font-size: 1.2rem; }
+      .opcao-entrega { gap: 1rem; }
+      .opcao-entrega label { font-size: 0.8rem; }
+    }
+    @media (max-width: 420px) {
+      .grid-itens { grid-template-columns: 1fr; }
+      .nav-tabs { gap: 0.3rem; }
+      .logo-placeholder img { max-height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= APP PRINCIPAL ================= -->
+<div class="app">
+  <div class="logo-topo">
+    <div class="logo-placeholder">
+      <img src="imagens/logo-dorata.png" alt="Dorata Coxinhas">
+    </div>
+  </div>
+
+  <nav class="nav-tabs">
+    <a href="#coxinhas" data-target="coxinhas"><i class="fas fa-drumstick-bite"></i> Coxinhas</a>
+    <a href="#combos" data-target="combos"><i class="fas fa-basket-shopping"></i> Combos</a>
+    <a href="#bebidas" data-target="bebidas"><i class="fas fa-glass-cheers"></i> Bebidas</a>
+  </nav>
+
+  <section id="coxinhas" class="secao">
+    <div class="categoria-titulo"><i class="fas fa-drumstick-bite"></i><h2>Coxinhas</h2></div>
+    <div class="grid-itens" id="coxinhas-container"></div>
+  </section>
+
+  <section id="combos" class="secao">
+    <div class="categoria-titulo"><i class="fas fa-basket-shopping"></i><h2>Combos</h2></div>
+    <div class="grid-itens" id="combos-container"></div>
+  </section>
+
+  <section id="bebidas" class="secao">
+    <div class="categoria-titulo"><i class="fas fa-glass-cheers"></i><h2>Bebidas</h2></div>
+    <div class="grid-itens" id="bebidas-container"></div>
+  </section>
+</div>
+
+<!-- ================= RODAPÉ (FOOTER) ================= -->
+<footer class="footer-dorata">
+  <div class="footer-grid">
+    <!-- COLUNA 1 -->
+    <div class="footer-col">
+      <h4><i class="fas fa-store-alt" style="color:#d4a017; margin-right:8px;"></i>Dorata Coxinhas</h4>
+      <p class="footer-info-text">
+        <i class="fas fa-map-pin"></i> Rua das Coxinhas, 100 – São Paulo/SP
+      </p>
+      <p class="footer-info-text">
+        <i class="fas fa-clock"></i> Aberto todos os dias das 17h às 22h
+      </p>
+      <p class="footer-info-text">
+        <i class="fas fa-phone-alt"></i> 
+        <a href="tel:+5534999685194">(34) 99968-5194</a>
+      </p>
+      <p class="footer-info-text">
+        <i class="fas fa-envelope"></i> 
+        <a href="mailto:contato@doratacoxinhas.com">contato@doratacoxinhas.com</a>
+      </p>
+    </div>
+
+    <!-- COLUNA 2 -->
+    <div class="footer-col footer-social">
+      <span class="social-title"><i class="fas fa-share-alt" style="color:#d4a017; margin-right:8px;"></i>Siga-nos</span>
+      <div class="social-buttons">
+        <a href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener noreferrer" class="btn-social instagram" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/5534999685194" target="_blank" rel="noopener noreferrer" class="btn-social whatsapp" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- COLUNA 3 -->
+    <div class="footer-col">
+      <span class="map-title"><i class="fas fa-map-marked-alt" style="color:#d4a017; margin-right:8px;"></i>Nossa localização</span>
+      <div class="map-wrapper">
+        <iframe 
+          src="https://www.google.com/maps?q=Rua+das+Coxinhas,+100,+São+Paulo&output=embed"
+          title="Mapa Dorata Coxinhas"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Dorata Coxinhas • Todos os direitos reservados.</p>
+    <p>
+      Desenvolvido por 
+      <span class="dev"><i class="fas fa-code"></i> VORTX GROUP SYSTEM</span>
+    </p>
+  </div>
+</footer>
+
+<!-- ================= MODAIS ================= -->
+<!-- MODAL DE SABORES DO COMBO -->
+<div class="modal-sabores" id="modal-sabores">
+  <div class="modal-sabores-content">
+    <button class="fechar-sabores" id="fechar-sabores">&times;</button>
+    <h3><i class="fas fa-utensils"></i> Escolha os sabores</h3>
+    <div class="info-combo" id="info-combo">
+      <strong id="combo-nome-modal"></strong> · <span id="combo-qtd-modal"></span> coxinhas
+    </div>
+    <div id="lista-sabores"></div>
+    <div class="total-sabores" id="total-sabores">
+      <span id="contador-sabores">0</span> de <span id="total-necessario">0</span> coxinhas selecionadas
+      <span id="status-sabores" class="restante">(Faltam <span id="faltam-sabores">0</span>)</span>
+    </div>
+    <button class="btn-adicionar-combo" id="btn-adicionar-combo" disabled>
+      <i class="fas fa-plus-circle"></i> Adicionar ao carrinho
+    </button>
+  </div>
+</div>
+
+<!-- CARRINHO FLUTUANTE -->
+<div class="carrinho-flutuante" id="carrinho-flutuante">
+  <div class="icone-carrinho">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="badge-qtd" id="badge-qtd">0</span>
+  </div>
+  <div class="info-resumo">
+    <span class="total-carrinho" id="total-carrinho-flutuante">R$ 0,00</span>
+    <span style="font-size:0.6rem; opacity:0.5; color:#8a7a66;"><i class="fas fa-chevron-up"></i> abrir</span>
+  </div>
+  <button class="abrir-pedido" id="abrir-modal-btn"><i class="fas fa-shopping-cart"></i> Carrinho</button>
+</div>
+
+<!-- MODAL CARRINHO -->
+<div class="modal-carrinho" id="modal-carrinho">
+  <div class="modal-content">
+    <button class="fechar-modal" id="fechar-modal">&times;</button>
+    <h3><i class="fas fa-shopping-cart"></i> Seu carrinho</h3>
+    
+    <div id="etapa-carrinho">
+      <div id="alerta-vazio" class="alerta-carrinho-vazio">Adicione itens ao carrinho antes de continuar.</div>
+      <div class="lista-carrinho-modal" id="lista-carrinho-modal">
+        <div style="color: #5a4a3a; text-align: center; padding: 0.6rem 0;">Nenhum item</div>
+      </div>
+      <div class="total-modal" id="total-modal">R$ 0,00</div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="btn-limpar-modal" id="limpar-modal"><i class="fas fa-trash-alt"></i> Limpar</button>
+      </div>
+      <button class="btn-continuar" id="btn-continuar"><i class="fas fa-arrow-right"></i> Continuar</button>
+    </div>
+
+    <div class="dados-entrega" id="dados-entrega">
+      <button class="btn-voltar-carrinho" id="btn-voltar-carrinho"><i class="fas fa-arrow-left"></i> Voltar</button>
+      <h4 style="margin-bottom:0.8rem; color:#f5d06a;"><i class="fas fa-map-pin"></i> Endereço de entrega</h4>
+
+      <div class="opcao-entrega">
+        <label><input type="radio" name="tipo-entrega" value="entrega" checked> <i class="fas fa-truck"></i> Entrega</label>
+        <label><input type="radio" name="tipo-entrega" value="retirada"> <i class="fas fa-store"></i> Retirada</label>
+      </div>
+
+      <div class="form-group-modal campo-endereco" id="campo-nome">
+        <label><i class="fas fa-user"></i> Nome <span class="obrigatorio">*</span></label>
+        <input type="text" id="nome-cliente" placeholder="Seu nome completo">
+        <div class="msg-erro" id="erro-nome">Preencha seu nome.</div>
+      </div>
+
+      <div class="form-group-modal campo-endereco" id="campo-rua">
+        <label><i class="fas fa-road"></i> Rua <span class="obrigatorio">*</span></label>
+        <input type="text" id="rua-cliente" placeholder="Nome da rua">
+        <div class="msg-erro" id="erro-rua">Preencha a rua.</div>
+      </div>
+
+      <div class="form-group-modal campo-endereco" id="campo-bairro">
+        <label><i class="fas fa-building"></i> Bairro <span class="obrigatorio">*</span></label>
+        <input type="text" id="bairro-cliente" placeholder="Bairro">
+        <div class="msg-erro" id="erro-bairro">Preencha o bairro.</div>
+      </div>
+
+      <div class="form-group-modal campo-endereco" id="campo-numero">
+        <label><i class="fas fa-hashtag"></i> Número <span class="obrigatorio">*</span></label>
+        <input type="text" id="numero-cliente" placeholder="Número da casa">
+        <div class="msg-erro" id="erro-numero">Preencha o número.</div>
+      </div>
+
+      <div class="form-group-modal campo-endereco" id="campo-complemento">
+        <label><i class="fas fa-pen"></i> Complemento <span style="font-weight:400; color:#5a4a3a;">(opcional)</span></label>
+        <input type="text" id="complemento-cliente" placeholder="Apartamento, bloco, etc.">
+      </div>
+
+      <div class="form-group-modal">
+        <label><i class="fas fa-credit-card"></i> Pagamento <span class="obrigatorio">*</span></label>
+        <select id="pagamento-modal">
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
+        </select>
+      </div>
+
+      <div class="form-group-modal campo-troco-modal" id="campo-troco-modal">
+        <label><i class="fas fa-coins"></i> Troco para</label>
+        <input type="number" id="troco-valor-modal" placeholder="Valor (ex: 50)" step="0.01" min="0">
+        <div class="msg-erro" id="erro-troco">O valor do troco deve ser maior ou igual ao total do pedido.</div>
+      </div>
+
+      <button class="btn-continuar" id="btn-ir-revisao"><i class="fas fa-check-circle"></i> Continuar</button>
+    </div>
+
+    <div class="tela-revisao" id="tela-revisao">
+      <button class="btn-voltar-endereco" id="btn-voltar-endereco"><i class="fas fa-arrow-left"></i> Voltar</button>
+      <h4><i class="fas fa-clipboard-list"></i> Revisar pedido</h4>
+
+      <div id="revisao-itens"></div>
+      <div class="revisao-total" id="revisao-total">R$ 0,00</div>
+
+      <div class="revisao-dado" id="revisao-nome"><strong>Nome:</strong> </div>
+      <div class="revisao-dado" id="revisao-endereco"><strong>Endereço:</strong> </div>
+      <div class="revisao-dado" id="revisao-pagamento"><strong>Pagamento:</strong> </div>
+      <div class="revisao-dado" id="revisao-troco"><strong>Troco:</strong> </div>
+
+      <div class="alerta-horario" id="alerta-horario">
+        <i class="fas fa-clock"></i> <span id="mensagem-horario"></span>
+      </div>
+
+      <button class="btn-finalizar" id="btn-finalizar">
+        <i class="fab fa-whatsapp"></i> Finalizar pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+  (function() {
+    const HORARIO_FUNCIONAMENTO = {
+      inicio: 17,
+      fim: 22,
+      diasSemana: [0, 1, 2, 3, 4, 5, 6]
+    };
+
+    const saboresDisponiveis = [
+      { id: 's1', nome: 'Frango' },
+      { id: 's2', nome: 'Frango com Catupiry' },
+      { id: 's3', nome: 'Calabresa' },
+      { id: 's4', nome: 'Carne' },
+      { id: 's5', nome: 'Pizza' },
+      { id: 's6', nome: 'Queijo Especial' }
+    ];
+
+    const itensCardapio = [
+      { id: 'c1', nome: 'Coxinha Frango', desc: 'Frango desfiado', preco: 3.99, categoria: 'coxinha', img: 'imagens/frango.jpeg' },
+      { id: 'c2', nome: 'Coxinha Frango Catupiry', desc: 'Frango com Catupiry Scala', preco: 5.79, categoria: 'coxinha', img: 'imagens/frango_catupiry.jpeg' },
+      { id: 'c3', nome: 'Coxinha Calabresa', desc: 'Calabresa Defumada', preco: 4.49, categoria: 'coxinha', img: 'imagens/calabresa.jpeg' },
+      { id: 'c4', nome: 'Coxinha Carne', desc: 'Carne', preco: 4.49, categoria: 'coxinha', img: 'imagens/carne.jpeg' },
+      { id: 'c5', nome: 'Coxinha Pizza', desc: 'Presunto, Mussarela e orégano', preco: 4.99, categoria: 'coxinha', img: 'imagens/pizza.jpeg' },
+      { id: 'c6', nome: 'Coxinha Queijo Especial', desc: 'Queijo cremoso', preco: 5.79, categoria: 'coxinha', img: 'imagens/queijo.jpeg' },
+      { id: 'k1', nome: 'Combo Individual', desc: '6 coxinhas', preco: 19.90, categoria: 'combo', img: 'imagens/combo-individual.jpeg', qtdCoxinhas: 6 },
+      { id: 'k2', nome: 'Combo Casal', desc: '8 coxinhas', preco: 25.90, categoria: 'combo', img: 'imagens/combo1.jpeg', qtdCoxinhas: 8 },
+      { id: 'k3', nome: 'Combo Clássico', desc: '10 coxinhas', preco: 29.90, categoria: 'combo', img: 'imagens/combo.jpeg', qtdCoxinhas: 10 },
+      { id: 'k4', nome: 'Combo Especial', desc: '15 coxinhas', preco: 49.90, categoria: 'combo', img: 'imagens/combo.jpeg', qtdCoxinhas: 15 },
+      { id: 'k5', nome: 'Combo Família', desc: '36 coxinhas', preco: 118.80, categoria: 'combo', img: 'imagens/combo.jpeg', qtdCoxinhas: 36 },
+      { id: 'b1', nome: 'Fanta Laranja 1L', desc: '', preco: 9.90, categoria: 'bebida', img: 'imagens/fanta.jpeg' },
+      { id: 'b2', nome: 'Coca Cola 1L', desc: '', preco: 9.90, categoria: 'bebida', img: 'imagens/coca.jpeg' },
+    ];
+
+    const STORAGE_KEY_CARRINHO = 'dorata_carrinho';
+    const STORAGE_KEY_DETALHES = 'dorata_combo_detalhes';
+    const STORAGE_KEY_DADOS = 'dorata_dados_entrega';
+
+    let carrinho = {};
+    let comboSelecionado = null;
+    let saboresSelecionados = {};
+
+    function verificarHorarioFuncionamento() {
+      const now = new Date();
+      const hora = now.getHours();
+      const diaSemana = now.getDay();
+      const { inicio, fim, diasSemana } = HORARIO_FUNCIONAMENTO;
+      if (!diasSemana.includes(diaSemana)) {
+        return { aberto: false, mensagem: 'Estamos fechados hoje. Nosso horário é das 17:00 às 22:00.' };
+      }
+      if (hora >= inicio && hora < fim) {
+        return { aberto: true, mensagem: '' };
+      } else {
+        const msg = hora < inicio 
+          ? `Ainda não abrimos. Abrimos às ${inicio}:00.`
+          : `Já fechamos. Nosso horário é das ${inicio}:00 às ${fim}:00.`;
+        return { aberto: false, mensagem: msg };
+      }
+    }
+
+    function carregarStorage() {
+      try {
+        const savedCarrinho = localStorage.getItem(STORAGE_KEY_CARRINHO);
+        if (savedCarrinho) carrinho = JSON.parse(savedCarrinho);
+        const savedDetalhes = localStorage.getItem(STORAGE_KEY_DETALHES);
+        window.comboDetalhes = savedDetalhes ? JSON.parse(savedDetalhes) : {};
+        const savedDados = localStorage.getItem(STORAGE_KEY_DADOS);
+        if (savedDados) {
+          const dados = JSON.parse(savedDados);
+          if (dados.nome) document.getElementById('nome-cliente').value = dados.nome;
+          if (dados.rua) document.getElementById('rua-cliente').value = dados.rua;
+          if (dados.bairro) document.getElementById('bairro-cliente').value = dados.bairro;
+          if (dados.numero) document.getElementById('numero-cliente').value = dados.numero;
+          if (dados.complemento) document.getElementById('complemento-cliente').value = dados.complemento;
+          if (dados.tipoEntrega) {
+            document.querySelector(`input[name="tipo-entrega"][value="${dados.tipoEntrega}"]`).checked = true;
+          }
+        }
+      } catch (e) { console.warn('Erro ao carregar storage', e); }
+    }
+
+    function salvarStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY_CARRINHO, JSON.stringify(carrinho));
+        localStorage.setItem(STORAGE_KEY_DETALHES, JSON.stringify(window.comboDetalhes || {}));
+        const nome = document.getElementById('nome-cliente').value;
+        const rua = document.getElementById('rua-cliente').value;
+        const bairro = document.getElementById('bairro-cliente').value;
+        const numero = document.getElementById('numero-cliente').value;
+        const complemento = document.getElementById('complemento-cliente').value;
+        const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+        localStorage.setItem(STORAGE_KEY_DADOS, JSON.stringify({ nome, rua, bairro, numero, complemento, tipoEntrega }));
+      } catch (e) { console.warn('Erro ao salvar storage', e); }
+    }
+
+    // ========== RENDER ITENS ==========
+    const coxinhasContainer = document.getElementById('coxinhas-container');
+    const combosContainer = document.getElementById('combos-container');
+    const bebidasContainer = document.getElementById('bebidas-container');
+    const listaCarrinhoModal = document.getElementById('lista-carrinho-modal');
+    const totalModalSpan = document.getElementById('total-modal');
+    const totalFlutuante = document.getElementById('total-carrinho-flutuante');
+    const badgeQtd = document.getElementById('badge-qtd');
+    const modal = document.getElementById('modal-carrinho');
+    const modalSabores = document.getElementById('modal-sabores');
+    const listaSabores = document.getElementById('lista-sabores');
+    const contadorSabores = document.getElementById('contador-sabores');
+    const totalNecessario = document.getElementById('total-necessario');
+    const faltamSabores = document.getElementById('faltam-sabores');
+    const statusSabores = document.getElementById('status-sabores');
+    const comboNomeModal = document.getElementById('combo-nome-modal');
+    const comboQtdModal = document.getElementById('combo-qtd-modal');
+    const btnAdicionarCombo = document.getElementById('btn-adicionar-combo');
+    const fecharSabores = document.getElementById('fechar-sabores');
+    const abrirModalBtn = document.getElementById('abrir-modal-btn');
+    const fecharModalBtn = document.getElementById('fechar-modal');
+    const limparModalBtn = document.getElementById('limpar-modal');
+    const btnContinuar = document.getElementById('btn-continuar');
+    const btnVoltarCarrinho = document.getElementById('btn-voltar-carrinho');
+    const btnIrRevisao = document.getElementById('btn-ir-revisao');
+    const btnVoltarEndereco = document.getElementById('btn-voltar-endereco');
+    const btnFinalizar = document.getElementById('btn-finalizar');
+    const etapaCarrinho = document.getElementById('etapa-carrinho');
+    const dadosEntrega = document.getElementById('dados-entrega');
+    const telaRevisao = document.getElementById('tela-revisao');
+    const revisaoItens = document.getElementById('revisao-itens');
+    const revisaoTotal = document.getElementById('revisao-total');
+    const revisaoNome = document.getElementById('revisao-nome');
+    const revisaoEndereco = document.getElementById('revisao-endereco');
+    const revisaoPagamento = document.getElementById('revisao-pagamento');
+    const revisaoTroco = document.getElementById('revisao-troco');
+    const nomeInput = document.getElementById('nome-cliente');
+    const ruaInput = document.getElementById('rua-cliente');
+    const bairroInput = document.getElementById('bairro-cliente');
+    const numeroInput = document.getElementById('numero-cliente');
+    const complementoInput = document.getElementById('complemento-cliente');
+    const pagamentoSelect = document.getElementById('pagamento-modal');
+    const trocoContainer = document.getElementById('campo-troco-modal');
+    const trocoInput = document.getElementById('troco-valor-modal');
+    const carrinhoFlutuante = document.getElementById('carrinho-flutuante');
+    const alertaVazio = document.getElementById('alerta-vazio');
+    const alertaHorario = document.getElementById('alerta-horario');
+    const mensagemHorario = document.getElementById('mensagem-horario');
+    const erroNome = document.getElementById('erro-nome');
+    const erroRua = document.getElementById('erro-rua');
+    const erroBairro = document.getElementById('erro-bairro');
+    const erroNumero = document.getElementById('erro-numero');
+    const erroTroco = document.getElementById('erro-troco');
+
+    const navLinks = document.querySelectorAll('.nav-tabs a');
+    const sections = {
+      coxinhas: document.getElementById('coxinhas'),
+      combos: document.getElementById('combos'),
+      bebidas: document.getElementById('bebidas')
+    };
+
+    function setActiveTab(targetId) {
+      navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === targetId));
+    }
+
+    function updateActiveTabOnScroll() {
+      const scrollY = window.scrollY + 100;
+      let found = false;
+      for (const [id, section] of Object.entries(sections)) {
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const top = rect.top + window.scrollY;
+          const bottom = top + rect.height;
+          if (scrollY >= top - 50 && scrollY < bottom - 50) {
+            setActiveTab(id);
+            found = true;
+            break;
+          }
+        }
+      }
+      if (!found && scrollY < 100) setActiveTab('coxinhas');
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        setActiveTab(this.dataset.target);
+      });
+    });
+    window.addEventListener('scroll', updateActiveTabOnScroll);
+    setTimeout(() => setActiveTab('coxinhas'), 100);
+
+    function renderItens() {
+      const coxinhas = itensCardapio.filter(i => i.categoria === 'coxinha');
+      const combos = itensCardapio.filter(i => i.categoria === 'combo');
+      const bebidas = itensCardapio.filter(i => i.categoria === 'bebida');
+
+      coxinhasContainer.innerHTML = coxinhas.map(item => criarCard(item, false)).join('');
+      combosContainer.innerHTML = combos.map(item => criarCard(item, true)).join('');
+      bebidasContainer.innerHTML = bebidas.map(item => criarCard(item, false)).join('');
+
+      document.querySelectorAll('.item-card').forEach(card => {
+        const id = card.dataset.id;
+        const isCombo = card.dataset.combo === 'true';
+        const qtdSpan = card.querySelector('.qtd-display');
+        const btnMenos = card.querySelector('.btn-menos');
+        const btnMais = card.querySelector('.btn-mais');
+        const img = card.querySelector('.item-img');
+
+        if (isCombo && img) {
+          img.addEventListener('click', () => abrirModalSabores(id));
+        }
+
+        function atualizarDisplay() {
+          let totalQtd = 0;
+          if (isCombo) {
+            Object.keys(carrinho).forEach(key => {
+              if (key.startsWith(id)) totalQtd += carrinho[key];
+            });
+          } else {
+            totalQtd = carrinho[id] || 0;
+          }
+          qtdSpan.textContent = totalQtd;
+        }
+
+        btnMenos.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (isCombo) {
+            const keys = Object.keys(carrinho).filter(key => key.startsWith(id));
+            if (keys.length > 0 && carrinho[keys[keys.length - 1]] > 0) {
+              const lastKey = keys[keys.length - 1];
+              carrinho[lastKey]--;
+              if (carrinho[lastKey] === 0) {
+                delete carrinho[lastKey];
+                if (window.comboDetalhes) delete window.comboDetalhes[lastKey];
+              }
+              atualizarDisplay();
+              atualizarTudo();
+              salvarStorage();
+            }
+          } else {
+            if (carrinho[id] && carrinho[id] > 0) {
+              carrinho[id]--;
+              if (carrinho[id] === 0) delete carrinho[id];
+              atualizarDisplay();
+              atualizarTudo();
+              salvarStorage();
+            }
+          }
+        });
+
+        btnMais.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (isCombo) {
+            abrirModalSabores(id);
+          } else {
+            if (!carrinho[id]) carrinho[id] = 0;
+            carrinho[id]++;
+            atualizarDisplay();
+            atualizarTudo();
+            salvarStorage();
+          }
+        });
+
+        atualizarDisplay();
+      });
+    }
+
+    function criarCard(item, isCombo) {
+      return `
+        <div class="item-card" data-id="${item.id}" data-combo="${isCombo}">
+          <div class="item-img">
+            <img src="${item.img || 'imagens/sem-imagem.jpg'}" alt="${item.nome}" onerror="this.src='https://placehold.co/300x200/1a1a1a/d4a017?text=Sem+Imagem'">
+          </div>
+          <div class="item-nome">${item.nome}</div>
+          <div class="item-desc">${item.desc}</div>
+          <div class="item-preco">R$ ${item.preco.toFixed(2)}</div>
+          <div class="qtd-control">
+            <button class="btn-menos" type="button">−</button>
+            <span class="qtd-display">0</span>
+            <button class="btn-mais" type="button">+</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== MODAL SABORES ==========
+    function abrirModalSabores(comboId) {
+      const combo = itensCardapio.find(i => i.id === comboId);
+      if (!combo) return;
+      comboSelecionado = combo;
+      saboresSelecionados = {};
+      saboresDisponiveis.forEach(s => { saboresSelecionados[s.id] = 0; });
+      comboNomeModal.textContent = combo.nome;
+      comboQtdModal.textContent = combo.qtdCoxinhas;
+      renderizarSabores();
+      modalSabores.classList.add('aberto');
+    }
+
+    function renderizarSabores() {
+      let html = '';
+      let totalCoxinhas = 0;
+      saboresDisponiveis.forEach(sabor => {
+        const qtd = saboresSelecionados[sabor.id] || 0;
+        totalCoxinhas += qtd;
+        html += `
+          <div class="sabor-item" data-sabor-id="${sabor.id}">
+            <span class="sabor-nome">${sabor.nome}</span>
+            <div class="sabor-qtd-control">
+              <button class="sabor-menos" type="button">−</button>
+              <span class="sabor-qtd-display">${qtd}</span>
+              <button class="sabor-mais" type="button">+</button>
+            </div>
+          </div>
+        `;
+      });
+      listaSabores.innerHTML = html;
+      const totalNecessarioValor = comboSelecionado.qtdCoxinhas;
+      const faltam = totalNecessarioValor - totalCoxinhas;
+      contadorSabores.textContent = totalCoxinhas;
+      totalNecessario.textContent = totalNecessarioValor;
+      if (totalCoxinhas === totalNecessarioValor) {
+        statusSabores.className = 'completo';
+        statusSabores.innerHTML = '✅ Completo!';
+        btnAdicionarCombo.disabled = false;
+      } else {
+        statusSabores.className = 'restante';
+        statusSabores.innerHTML = `(Faltam ${faltam})`;
+        btnAdicionarCombo.disabled = true;
+      }
+      document.querySelectorAll('.sabor-item').forEach(el => {
+        const saborId = el.dataset.saborId;
+        const qtdSpan = el.querySelector('.sabor-qtd-display');
+        const btnMenos = el.querySelector('.sabor-menos');
+        const btnMais = el.querySelector('.sabor-mais');
+        btnMenos.addEventListener('click', () => {
+          if (saboresSelecionados[saborId] > 0) {
+            saboresSelecionados[saborId]--;
+            renderizarSabores();
+          }
+        });
+        btnMais.addEventListener('click', () => {
+          const totalAtual = Object.values(saboresSelecionados).reduce((a, b) => a + b, 0);
+          if (totalAtual < comboSelecionado.qtdCoxinhas) {
+            saboresSelecionados[saborId]++;
+            renderizarSabores();
+          }
+        });
+      });
+    }
+
+    function fecharModalSabores() {
+      modalSabores.classList.remove('aberto');
+      comboSelecionado = null;
+      saboresSelecionados = {};
+    }
+
+    function adicionarComboAoCarrinho() {
+      if (!comboSelecionado) return;
+      const totalCoxinhas = Object.values(saboresSelecionados).reduce((a, b) => a + b, 0);
+      if (totalCoxinhas !== comboSelecionado.qtdCoxinhas) return;
+      const temSabor = Object.values(saboresSelecionados).some(qtd => qtd > 0);
+      if (!temSabor) return;
+      const comboId = comboSelecionado.id;
+      const saborKey = Object.keys(saboresSelecionados)
+        .filter(id => saboresSelecionados[id] > 0)
+        .map(id => `${id}x${saboresSelecionados[id]}`)
+        .join('_');
+      const uniqueId = `${comboId}_${saborKey}`;
+      const precoTotal = comboSelecionado.preco;
+      const detalhes = [];
+      saboresDisponiveis.forEach(sabor => {
+        const qtd = saboresSelecionados[sabor.id] || 0;
+        if (qtd > 0) detalhes.push(`${qtd}x ${sabor.nome}`);
+      });
+      if (!carrinho[uniqueId]) carrinho[uniqueId] = 0;
+      carrinho[uniqueId]++;
+      if (!window.comboDetalhes) window.comboDetalhes = {};
+      window.comboDetalhes[uniqueId] = {
+        nome: comboSelecionado.nome,
+        detalhes: detalhes.join(', '),
+        precoUnitario: precoTotal,
+        qtdCoxinhas: comboSelecionado.qtdCoxinhas,
+        img: comboSelecionado.img || 'imagens/sem-imagem.jpg'
+      };
+      atualizarTudo();
+      salvarStorage();
+      fecharModalSabores();
+      
+      // Atualiza o display nos cards
+      document.querySelectorAll(`.item-card[data-id="${comboSelecionado.id}"] .qtd-display`).forEach(el => {
+        let totalQtd = 0;
+        Object.keys(carrinho).forEach(key => {
+          if (key.startsWith(comboSelecionado.id)) totalQtd += carrinho[key];
+        });
+        el.textContent = totalQtd;
+      });
+    }
+
+    // ========== ATUALIZAR CARRINHO (COM IMAGENS) ==========
+    function atualizarTudo() {
+      const ids = Object.keys(carrinho);
+      let total = 0;
+      let qtdTotal = 0;
+      let html = '';
+      
+      if (alertaVazio) alertaVazio.style.display = 'none';
+      
+      if (ids.length === 0) {
+        listaCarrinhoModal.innerHTML = `<div style="color: #5a4a3a; text-align: center; padding: 0.6rem 0;">Nenhum item</div>`;
+        totalModalSpan.textContent = 'R$ 0,00';
+        totalFlutuante.textContent = 'R$ 0,00';
+        badgeQtd.textContent = '0';
+        return;
+      }
+      
+      ids.forEach(id => {
+        const qtd = carrinho[id];
+        let item = itensCardapio.find(i => i.id === id);
+        let nome = item ? item.nome : 'Item';
+        let precoUnitario = item ? item.preco : 0;
+        let detalhes = '';
+        let imgSrc = item ? (item.img || 'imagens/sem-imagem.jpg') : 'imagens/sem-imagem.jpg';
+        
+        // Verifica se é um combo com detalhes salvos
+        if (window.comboDetalhes && window.comboDetalhes[id]) {
+          const comboInfo = window.comboDetalhes[id];
+          nome = comboInfo.nome;
+          precoUnitario = comboInfo.precoUnitario;
+          detalhes = comboInfo.detalhes;
+          if (comboInfo.img) imgSrc = comboInfo.img;
+        }
+        
+        const subtotal = precoUnitario * qtd;
+        total += subtotal;
+        qtdTotal += qtd;
+        
+        // Tratamento para imagem quebrada
+        const imgOnError = "this.onerror=null; this.src='https://placehold.co/100x100/1a1a1a/d4a017?text=Item'";
+        
+        html += `
+          <div class="item-carrinho-modal" data-id="${id}">
+            <div class="info-item">
+              <div class="item-thumb">
+                <img src="${imgSrc}" alt="${nome}" onerror="${imgOnError}" loading="lazy">
+              </div>
+              <div class="info-texto">
+                <span class="nome-qtd">${qtd}x ${nome}</span>
+                ${detalhes ? `<span class="detalhes-combo">${detalhes}</span>` : ''}
+                <span class="preco-item">R$ ${subtotal.toFixed(2)}</span>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; flex-wrap:wrap;">
+              <div class="controles-item">
+                <button class="btn-carrinho-menos" type="button">−</button>
+                <span class="carrinho-qtd-display">${qtd}</span>
+                <button class="btn-carrinho-mais" type="button">+</button>
+              </div>
+              <button class="btn-excluir" type="button"><i class="fas fa-times"></i></button>
+            </div>
+          </div>
+        `;
+      });
+      
+      listaCarrinhoModal.innerHTML = html;
+      const totalStr = total.toFixed(2);
+      totalModalSpan.textContent = `R$ ${totalStr}`;
+      totalFlutuante.textContent = `R$ ${totalStr}`;
+      badgeQtd.textContent = qtdTotal;
+      
+      // Event listeners dos itens do carrinho
+      document.querySelectorAll('.item-carrinho-modal').forEach(el => {
+        const id = el.dataset.id;
+        const qtdSpan = el.querySelector('.carrinho-qtd-display');
+        const btnMenos = el.querySelector('.btn-carrinho-menos');
+        const btnMais = el.querySelector('.btn-carrinho-mais');
+        const btnExcluir = el.querySelector('.btn-excluir');
+        
+        function atualizarQtd() {
+          const qtd = carrinho[id] || 0;
+          qtdSpan.textContent = qtd;
+        }
+        
+        btnMenos.addEventListener('click', () => {
+          if (carrinho[id] && carrinho[id] > 0) {
+            carrinho[id]--;
+            if (carrinho[id] === 0) {
+              delete carrinho[id];
+              if (window.comboDetalhes) delete window.comboDetalhes[id];
+            }
+            atualizarQtd();
+            const baseId = id.split('_')[0];
+            document.querySelectorAll(`.item-card[data-id="${baseId}"] .qtd-display`).forEach(el => {
+              let totalQtd = 0;
+              Object.keys(carrinho).forEach(key => {
+                if (key.startsWith(baseId)) totalQtd += carrinho[key];
+              });
+              el.textContent = totalQtd;
+            });
+            atualizarTudo();
+            salvarStorage();
+          }
+        });
+        
+        btnMais.addEventListener('click', () => {
+          if (!carrinho[id]) carrinho[id] = 0;
+          carrinho[id]++;
+          atualizarQtd();
+          const baseId = id.split('_')[0];
+          document.querySelectorAll(`.item-card[data-id="${baseId}"] .qtd-display`).forEach(el => {
+            let totalQtd = 0;
+            Object.keys(carrinho).forEach(key => {
+              if (key.startsWith(baseId)) totalQtd += carrinho[key];
+            });
+            el.textContent = totalQtd;
+          });
+          atualizarTudo();
+          salvarStorage();
+        });
+        
+        btnExcluir.addEventListener('click', () => {
+          delete carrinho[id];
+          if (window.comboDetalhes) delete window.comboDetalhes[id];
+          const baseId = id.split('_')[0];
+          document.querySelectorAll(`.item-card[data-id="${baseId}"] .qtd-display`).forEach(el => {
+            let totalQtd = 0;
+            Object.keys(carrinho).forEach(key => {
+              if (key.startsWith(baseId)) totalQtd += carrinho[key];
+            });
+            el.textContent = totalQtd;
+          });
+          atualizarTudo();
+          salvarStorage();
+        });
+      });
+    }
+
+    function limparPedido() {
+      carrinho = {};
+      window.comboDetalhes = {};
+      document.querySelectorAll('.item-card .qtd-display').forEach(el => el.textContent = '0');
+      atualizarTudo();
+      limparErros();
+      salvarStorage();
+    }
+
+    function limparErros() {
+      [erroNome, erroRua, erroBairro, erroNumero, erroTroco].forEach(el => {
+        if (el) el.classList.remove('visivel');
+      });
+      [nomeInput, ruaInput, bairroInput, numeroInput].forEach(el => el.classList.remove('erro'));
+      if (alertaVazio) alertaVazio.style.display = 'none';
+    }
+
+    function toggleTroco() {
+      trocoContainer.classList.toggle('visivel', pagamentoSelect.value === 'Dinheiro');
+    }
+
+    function calcularTotalCarrinho() {
+      let total = 0;
+      Object.keys(carrinho).forEach(id => {
+        const qtd = carrinho[id];
+        let item = itensCardapio.find(i => i.id === id);
+        let precoUnitario = item ? item.preco : 0;
+        if (window.comboDetalhes && window.comboDetalhes[id]) {
+          precoUnitario = window.comboDetalhes[id].precoUnitario;
+        }
+        total += precoUnitario * qtd;
+      });
+      return total;
+    }
+
+    function validarFormulario() {
+      let valido = true;
+      limparErros();
+      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      if (!nomeInput.value.trim()) {
+        erroNome.classList.add('visivel');
+        nomeInput.classList.add('erro');
+        valido = false;
+      }
+      if (tipoEntrega === 'entrega') {
+        if (!ruaInput.value.trim()) {
+          erroRua.classList.add('visivel');
+          ruaInput.classList.add('erro');
+          valido = false;
+        }
+        if (!bairroInput.value.trim()) {
+          erroBairro.classList.add('visivel');
+          bairroInput.classList.add('erro');
+          valido = false;
+        }
+        if (!numeroInput.value.trim()) {
+          erroNumero.classList.add('visivel');
+          numeroInput.classList.add('erro');
+          valido = false;
+        }
+      }
+      if (pagamentoSelect.value === 'Dinheiro' && trocoInput.value.trim() !== '') {
+        const trocoValor = parseFloat(trocoInput.value);
+        const total = calcularTotalCarrinho();
+        if (!isNaN(trocoValor) && trocoValor < total) {
+          erroTroco.classList.add('visivel');
+          trocoInput.classList.add('erro');
+          valido = false;
+        }
+      }
+      return valido;
+    }
+
+    function verificarHorarioEAtualizarBotao() {
+      const status = verificarHorarioFuncionamento();
+      const btn = document.getElementById('btn-finalizar');
+      const alerta = document.getElementById('alerta-horario');
+      const msg = document.getElementById('mensagem-horario');
+      if (!status.aberto) {
+        btn.disabled = true;
+        alerta.classList.add('visivel');
+        msg.textContent = status.mensagem;
+      } else {
+        btn.disabled = false;
+        alerta.classList.remove('visivel');
+        msg.textContent = '';
+      }
+    }
+
+    function agruparItensIdenticos() {
+      const grupos = {};
+      Object.keys(carrinho).forEach(id => {
+        const qtd = carrinho[id];
+        let item = itensCardapio.find(i => i.id === id);
+        let nome = item ? item.nome : 'Item';
+        let detalhes = '';
+        let precoUnitario = item ? item.preco : 0;
+        if (window.comboDetalhes && window.comboDetalhes[id]) {
+          const comboInfo = window.comboDetalhes[id];
+          nome = comboInfo.nome;
+          detalhes = comboInfo.detalhes;
+          precoUnitario = comboInfo.precoUnitario;
+        }
+        const chave = detalhes ? `${nome} (${detalhes})` : nome;
+        if (!grupos[chave]) grupos[chave] = { qtd: 0, precoUnitario: precoUnitario };
+        grupos[chave].qtd += qtd;
+      });
+      return grupos;
+    }
+
+    function carregarRevisao() {
+      const grupos = agruparItensIdenticos();
+      let total = 0;
+      let html = '';
+      Object.entries(grupos).forEach(([nome, info]) => {
+        const { qtd, precoUnitario } = info;
+        total += precoUnitario * qtd;
+        html += `<div class="revisao-item"><span>${qtd}x ${nome}</span><span>R$ ${(precoUnitario * qtd).toFixed(2)}</span></div>`;
+      });
+      revisaoItens.innerHTML = html;
+      revisaoTotal.textContent = `R$ ${total.toFixed(2)}`;
+      const nome = nomeInput.value.trim();
+      const rua = ruaInput.value.trim();
+      const bairro = bairroInput.value.trim();
+      const numero = numeroInput.value.trim();
+      const complemento = complementoInput.value.trim();
+      const pagamento = pagamentoSelect.value;
+      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      let enderecoDisplay = tipoEntrega === 'retirada' ? '🔄 Retirada no local' : `${rua}, ${numero} - ${bairro}${complemento ? ', ' + complemento : ''}`;
+      let troco = trocoInput.value.trim();
+      if (pagamento === 'Dinheiro' && troco !== '') {
+        troco = `R$ ${parseFloat(troco).toFixed(2)}`;
+      } else {
+        troco = 'Não se aplica';
+      }
+      revisaoNome.innerHTML = `<strong>Nome:</strong> ${nome}`;
+      revisaoEndereco.innerHTML = `<strong>${tipoEntrega === 'retirada' ? 'Retirada' : 'Endereço'}:</strong> ${enderecoDisplay}`;
+      revisaoPagamento.innerHTML = `<strong>Pagamento:</strong> ${pagamento}`;
+      revisaoTroco.innerHTML = `<strong>Troco:</strong> ${troco}`;
+      verificarHorarioEAtualizarBotao();
+    }
+
+    function enviarWhatsApp() {
+      const status = verificarHorarioFuncionamento();
+      if (!status.aberto) {
+        alert('Desculpe, estamos fechados no momento. ' + status.mensagem);
+        return;
+      }
+      const nome = nomeInput.value.trim();
+      const rua = ruaInput.value.trim();
+      const bairro = bairroInput.value.trim();
+      const numero = numeroInput.value.trim();
+      const complemento = complementoInput.value.trim();
+      const pagamento = pagamentoSelect.value;
+      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      let troco = trocoInput.value.trim();
+      if (pagamento === 'Dinheiro' && troco !== '') {
+        troco = `R$ ${parseFloat(troco).toFixed(2)}`;
+      } else {
+        troco = 'Não se aplica';
+      }
+      const grupos = agruparItensIdenticos();
+      let itensTexto = '';
+      let total = 0;
+      Object.entries(grupos).forEach(([nomeItem, info]) => {
+        const { qtd, precoUnitario } = info;
+        total += precoUnitario * qtd;
+        itensTexto += `   ${qtd}x ${nomeItem}\n`;
+      });
+      let enderecoDisplay = tipoEntrega === 'retirada' ? '🔄 Retirada no local' : `${rua}, ${numero} - ${bairro}${complemento ? ', ' + complemento : ''}`;
+      const totalStr = total.toFixed(2);
+      let mensagem = `*NOVO PEDIDO - DORATA COXINHAS*\n\n`;
+      mensagem += `*Cliente:* ${nome}\n`;
+      mensagem += `*${tipoEntrega === 'retirada' ? 'Retirada' : 'Endereço'}:* ${enderecoDisplay}\n`;
+      mensagem += `*Itens:*\n${itensTexto}`;
+      mensagem += `\n*Total:* R$ ${totalStr}`;
+      mensagem += `\n*Pagamento:* ${pagamento}`;
+      if (pagamento === 'Dinheiro' && troco !== 'Não se aplica') {
+        mensagem += `\n*Troco para:* ${troco}`;
+      }
+      mensagem += `\n\n*Enviado pelo cardápio digital*`;
+      const msgEncoded = encodeURIComponent(mensagem);
+      const numeroWhats = '5534999685194';
+      window.open(`https://wa.me/${numeroWhats}?text=${msgEncoded}`, '_blank');
+    }
+
+    function mostrarCarrinho() {
+      etapaCarrinho.style.display = 'block';
+      dadosEntrega.classList.remove('ativo');
+      telaRevisao.classList.remove('ativo');
+      limparErros();
+    }
+
+    function mostrarEndereco() {
+      etapaCarrinho.style.display = 'none';
+      dadosEntrega.classList.add('ativo');
+      telaRevisao.classList.remove('ativo');
+    }
+
+    function mostrarRevisao() {
+      if (!validarFormulario()) {
+        const primeiroErro = document.querySelector('.msg-erro.visivel');
+        if (primeiroErro) primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      salvarStorage();
+      etapaCarrinho.style.display = 'none';
+      dadosEntrega.classList.remove('ativo');
+      telaRevisao.classList.add('ativo');
+      carregarRevisao();
+    }
+
+    function toggleCamposEndereco() {
+      const tipoEntrega = document.querySelector('input[name="tipo-entrega"]:checked')?.value || 'entrega';
+      const isRetirada = tipoEntrega === 'retirada';
+      ['campo-rua', 'campo-bairro', 'campo-numero', 'campo-complemento'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('retirada', isRetirada);
+      });
+      salvarStorage();
+    }
+
+    // ========== EVENT LISTENERS ==========
+    document.querySelectorAll('input[name="tipo-entrega"]').forEach(radio => {
+      radio.addEventListener('change', toggleCamposEndereco);
+    });
+    pagamentoSelect.addEventListener('change', toggleTroco);
+    limparModalBtn.addEventListener('click', limparPedido);
+    btnFinalizar.addEventListener('click', enviarWhatsApp);
+    btnAdicionarCombo.addEventListener('click', adicionarComboAoCarrinho);
+    fecharSabores.addEventListener('click', fecharModalSabores);
+    modalSabores.addEventListener('click', (e) => {
+      if (e.target === modalSabores) fecharModalSabores();
+    });
+    btnContinuar.addEventListener('click', () => {
+      const ids = Object.keys(carrinho);
+      if (ids.length === 0) {
+        if (alertaVazio) alertaVazio.style.display = 'block';
+        return;
+      }
+      mostrarEndereco();
+    });
+    btnIrRevisao.addEventListener('click', mostrarRevisao);
+    btnVoltarCarrinho.addEventListener('click', mostrarCarrinho);
+    btnVoltarEndereco.addEventListener('click', mostrarEndereco);
+
+    [nomeInput, ruaInput, bairroInput, numeroInput, trocoInput].forEach(input => {
+      input.addEventListener('input', function() {
+        this.classList.remove('erro');
+        const erroId = this.id.replace('-cliente', '').replace('-valor-modal', '');
+        const erroEl = document.getElementById(`erro-${erroId}`);
+        if (erroEl) erroEl.classList.remove('visivel');
+        salvarStorage();
+      });
+    });
+
+    abrirModalBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modal.classList.add('aberto');
+      mostrarCarrinho();
+      atualizarTudo();
+      toggleTroco();
+      limparErros();
+    });
+
+    fecharModalBtn.addEventListener('click', () => {
+      modal.classList.remove('aberto');
+      mostrarCarrinho();
+      salvarStorage();
+    });
+
+    carrinhoFlutuante.addEventListener('click', (e) => {
+      if (e.target.closest('.abrir-pedido')) return;
+      modal.classList.add('aberto');
+      mostrarCarrinho();
+      atualizarTudo();
+      toggleTroco();
+      limparErros();
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('aberto');
+        mostrarCarrinho();
+        salvarStorage();
+      }
+    });
+
+    // ========== INICIALIZAÇÃO ==========
+    carregarStorage();
+    renderItens();
+    atualizarTudo();
+    toggleTroco();
+    toggleCamposEndereco();
+    if (pagamentoSelect.value === 'Dinheiro') trocoContainer.classList.add('visivel');
+    verificarHorarioEAtualizarBotao();
+  })();
+</script>
+
+</body>
+</html>
